@@ -1,0 +1,4 @@
+# 项目排除路径
+/data-server/target/
+/travel-framework/target/
+/user-server/target/
