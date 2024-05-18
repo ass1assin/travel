@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>user-server</artifactId>
-    <name>user-server</name>
-    <description>user-server</description>
+    <artifactId>travel-user</artifactId>
+    <name>travel-user</name>
+    <description>travel-user</description>
 
     <properties>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

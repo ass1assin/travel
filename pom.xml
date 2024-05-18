@@ -19,10 +19,10 @@
   </properties>
 
   <modules>
-    <module>data-server</module>
+    <module>travel-data</module>
     <module>eureka-server</module>
-    <module>user-server</module>
-    <module>gateway-server</module>
+    <module>travel-user</module>
+    <module>travel-gateway</module>
     <module>travel-framework</module>
   </modules>
   <packaging>pom</packaging>

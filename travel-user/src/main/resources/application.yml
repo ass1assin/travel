@@ -2,7 +2,7 @@ server:
   port: 8092
 spring:
   application:
-    name: user-server # 服务名
+    name: travel-user # 服务名
   cloud:
     nacos:
       discovery:

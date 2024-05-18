@@ -2,7 +2,7 @@ server:
   port: 8091
 spring:
   application:
-    name: data-server # 服务名
+    name: travel-data # 服务名
   cloud:
     nacos:
       discovery:

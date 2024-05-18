@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>data-server</artifactId>
-    <name>data-server</name>
-    <description>data-server</description>
+    <artifactId>travel-data</artifactId>
+    <name>travel-data</name>
+    <description>travel-data</description>
     <packaging>war</packaging>
 
     <properties>
@@ -58,6 +58,6 @@
 
     </dependencyManagement>
     <build>
-        <finalName>data-server</finalName>
+        <finalName>travel-data</finalName>
     </build>
 </project>

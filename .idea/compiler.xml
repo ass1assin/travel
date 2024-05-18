@@ -6,10 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gateway-server" />
+        <module name="travel-gateway" />
+        <module name="travel-user" />
+        <module name="travel-data" />
         <module name="eureka-server" />
-        <module name="user-server" />
-        <module name="data-server" />
         <module name="travel-framework" />
       </profile>
     </annotationProcessing>
