@@ -10,7 +10,23 @@ spring:
     gateway:
       routes: # 网关路由配置
         - id: customer-user-service
-          # uri: http://127.0.0.1:8081 # 路由的目标地址 http就是固定地址
-          uri: lb://customer-user-service/api/customer-user/** # 路由的目标地址 lb就是负载均衡，后面跟服务名称
-          predicates: # 路由断言，也就是判断请求是否符合路由规则的条件
-            - Path=/api/customer-user/** # 这个是按照路径匹配，只要以/user/开头就符合要求
+          uri: lb://travel-data
+          predicates:
+            - Path=/dev-api/**
+      default-filters:
+          - StripPrefix=1
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+#              - "http://localhost:10011"
+            allowedMethods:
+              - "GET"
+              - "POST"
+              - "PUT"
+              - "DELETE"
+              - "OPTIONS"
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600

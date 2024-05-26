@@ -1,22 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+// import HomeView from '../views/HomeView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    redirect: '/index_manage' // 当访问 / 时，重定向到 /index_manage
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/index_manage',
+    name: 'index_manage',
+    component: () => import('../views/admin/index_manage')
+  },
+  {
+    path: '/hotel_manage',
+    name: 'hotel_manage',
+    component: () => import('../views/admin/hotel_manage')
+  },
+  {
+    path: '/traffic_manage',
+    name: 'traffic_manage',
+    component: () => import('../views/admin/traffic_manage')
   }
 ]
 

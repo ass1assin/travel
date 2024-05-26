@@ -1,32 +1,41 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <Sidebar/>
+    <div id="main-content">
+      <Navbar/>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
+
+<script>
+import Sidebar from '@/components/sidebar/sidebar.vue';
+import Navbar from "@/components/navbar/navbar.vue";
+export default {
+  components: {
+    Sidebar,
+    Navbar,
+  },
+}
+</script>
 
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  //text-align: center;
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body {
+  margin: 0;
+}
+#main-content {
+  flex: 1; /* 填充剩余空间 */
+  max-width: calc(100% - 200px); /* 侧边栏的宽度 */
+  margin-left: 200px;
+  flex-direction: column;
+  overflow-y: auto;
 }
 </style>

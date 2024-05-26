@@ -12,3 +12,10 @@ spring:
     url: jdbc:mysql://localhost:3306/travel?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&tinyInt1isBit=false
     username: root
     password: 144601
+
+## Swagger配置
+#swagger:
+#  # 是否开启swagger
+#  enabled: true
+#  # 请求前缀
+#  pathMapping: /dev-api
