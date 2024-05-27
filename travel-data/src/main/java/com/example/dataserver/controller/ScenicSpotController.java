@@ -24,7 +24,10 @@ public class ScenicSpotController {
         return AjaxResult.success(pageInfo);
     }
     @GetMapping("/test")
-    public String test(){
-        return "干什么";
+    public List<ScenicSpot> test(){
+//        PageHelper.startPage(scenicSpot.getCurrentPage(), scenicSpot.getPageSize());
+        List<ScenicSpot> list = scenicSpotService.getAllSpot();
+//        PageInfo<ScenicSpot> pageInfo = new PageInfo<>(list);
+        return list;
     }
 }

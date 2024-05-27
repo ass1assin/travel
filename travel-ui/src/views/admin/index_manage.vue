@@ -19,9 +19,9 @@
         style="width: 100%;" :row-class-name="setClassName">
       <!--收缩行-->
       <!--展示行-->
-      <el-table-column label="预约编号" align="center" prop="proomId">
+      <el-table-column label="编号" align="center">
         <template slot-scope="scope">
-          {{ scope.row.resId || '暂无数据' }}
+          {{ scope.row.id || '暂无数据' }}
         </template>
       </el-table-column>
 
@@ -44,30 +44,30 @@
 <!--        </template>-->
 <!--      </el-table-column>-->
 
-      <el-table-column label="学生学号" align="center" prop="closeTime">
+      <el-table-column label="景点名称" align="center">
         <template slot-scope="scope">
-          {{ scope.row.stuId || '暂无数据' }}
+          {{ scope.row.spotName || '暂无数据' }}
         </template>
       </el-table-column>
 
-      <el-table-column label="琴房地址" align="center" prop="type">
-        <template slot-scope="scope">
-          {{ scope.row.address || '暂无数据' }}
-        </template>
-      </el-table-column>
-      <el-table-column label="学生证编号" align="center" prop="type">
-        <template slot-scope="scope">
-          {{ scope.row.stucardId || '暂无数据' }}
+<!--      <el-table-column label="琴房地址" align="center" prop="type">-->
+<!--        <template slot-scope="scope">-->
+<!--          {{ scope.row.address || '暂无数据' }}-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="学生证编号" align="center" prop="type">-->
+<!--        <template slot-scope="scope">-->
+<!--          {{ scope.row.stucardId || '暂无数据' }}-->
 
-        </template>
-      </el-table-column>
+<!--        </template>-->
+<!--      </el-table-column>-->
 
-      <el-table-column label="操作" align="center" min-width="160">
-        <template slot-scope="scope">
-          <el-button v-if="parseInt(scope.row.signStatus) === 0" type="primary" size="mini" @click="edit(scope.row.resId)">签到</el-button>
-          <span v-else style="color: tomato">已签到</span>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="操作" align="center" min-width="160">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-button v-if="parseInt(scope.row.signStatus) === 0" type="primary" size="mini" @click="edit(scope.row.resId)">签到</el-button>-->
+<!--          <span v-else style="color: tomato">已签到</span>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
 
     </el-table>
     <!--    分页-->
@@ -123,15 +123,11 @@ export default {
     // },
     getList() {
       this.loading = true
-      test().then((res) => {
-        console.log(res);
+      getAllSpot(this.queryParams).then((res) => {
+        console.log("%o",res);
+        this.dataList = res.data.list;
+        this.total = res.data.total
       });
-      // getAllSpot(this.queryParams).then((res) => {
-      //   console.log(res);
-      //   // console.log(res, "结果");
-      //   // this.dataList = res.data.data.list;
-      //   // this.total = res.data.data.total
-      // });
     },
 
     // edit(resId){
@@ -139,7 +135,6 @@ export default {
     //     this.getList();
     //   })
     // },
-
 
     // 表格下拉展示
     setClassName({ row, index }) {

@@ -186,7 +186,7 @@
       <div class="container pb-4">
         <header class="text-center mb-5">
           <h2>寻觅梧州踪迹</h2>
-          <p>A place for your Instagram pictures or gallery.</p>
+<!--          <p>A place for your Instagram pictures or gallery.</p>-->
         </header>
         <div class="row">
           <div class="col-lg-3 col-md-6 px-md-1 py-1"><a class="instagram-item d-block w-100 reset-anchor text-white" href="#!"><img class="img-fluid" src="img/listing-tnumbnail-1.jpg" alt="">
@@ -226,31 +226,61 @@
     </section>
 
     <section class="py-5">
-        <div class="container py-4">
-            <h3 class="h5">热门推荐</h3>
-            <ul class="list-unstyled">
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-1.jpg" alt=""></a>
-                    <div class="media-body ms-3">
-                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                        <h3 class="mb-1"><a class="reset-anchor" href="post.html">The top climbing tours</a></h3>
-                        <p>Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
-                    </div>
-                </li>
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-2.jpg" alt=""></a>
-                    <div class="media-body ms-3">
-                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                        <h3 class="mb-1"><a class="reset-anchor" href="post.html">Travel guide to Canada</a></h3>
-                        <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
-                    </div>
-                </li>
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-3.jpg" alt=""></a>
-                    <div class="media-body ms-3">
-                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                        <h3 class="mb-1"><a class="reset-anchor" href="post.html">A day in Tailand</a></h3>
-                        <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
-                    </div>
-                </li>
-            </ul>
+        <div class="container py-4" style="display: flex;justify-content: space-between;">
+            <div style="width: 320px">
+                <div style="display: flex;justify-content: space-between;">
+                    <span><h3 class="h5">旅游攻略推荐</h3></span>
+                    <span style="color: #5c636a">更多</span>
+                </div>
+                <div>
+                    <img class="img-fluid" src="img/liangyusheng.jpg" alt="">
+                </div>
+                <h4 class="h5" style="margin-top: 20px">最新资讯</h4>
+                <ul class="list-unstyled">
+                    <li class="d-flex mb-1" style="overflow: hidden;">
+                            <p>02月19日科技"战密”∶马蜂窝大数据赋能旅游业</p>
+                    </li>
+                    <li class="d-flex mb-1">
+                            <p>02月13日陈罡:控情下旅游业的“守恒与求变</p>
+                    </li>
+                    <li class="d-flex mb-1">
+                            <p>02月06日马蜂窝将退订完成率定为最高KPI</p>
+                    </li>
+                </ul>
+            </div>
+            <div style="width: 760px; margin-left: auto; margin-right: auto;">
+                <h3 class="h5">热门推荐</h3>
+<!--                <ul class="list-unstyled">-->
+<!--                    <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-1.jpg" alt=""></a>-->
+<!--                        <div class="media-body ms-3">-->
+<!--                            <h3 class="mb-1"><a class="reset-anchor" href="post.html">The top climbing tours</a></h3>-->
+<!--                            <p>买好机票的那个晚上 我疯狂摇着迈克擂的手，期待与兴奋使我暂时忘记曾经历10个小时洲际航线的辛苦 自年幼的第一次远行至今 我们终于！即将！抵达！地球的另一边了！ 继“ 北疆 三美游击队”</p>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-2.jpg" alt=""></a>-->
+<!--                        <div class="media-body ms-3">-->
+<!--                            <h3 class="mb-1"><a class="reset-anchor" href="post.html">Travel guide to Canada</a></h3>-->
+<!--                            <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-3.jpg" alt=""></a>-->
+<!--                        <div class="media-body ms-3">-->
+<!--                            <h3 class="mb-1"><a class="reset-anchor" href="post.html">A day in Tailand</a></h3>-->
+<!--                            <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+                <ul class="list-unstyled">
+                    <li class="d-flex mb-1" th:each="post : ${pageInfo.list}">
+<!--                        <a href="post.html"><img th:src="${post.imageUrl}" alt=""></a>-->
+                        <div class="media-body ms-3">
+                            <h3 class="mb-1"><a class="reset-anchor" th:href="@{/post/{id}(id=${post.id})}"
+                                                th:text="${post.spotName}">Post Title</a></h3>
+<!--                            <p th:text="${post.summary}">Post Summary</p>-->
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
     <section class="py-5">
