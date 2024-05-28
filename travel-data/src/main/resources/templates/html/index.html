@@ -23,6 +23,19 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
       <style>
+          .media-body h3 {
+              /* 阻止内容换行 */
+              white-space: nowrap;
+              /* 隐藏溢出的内容 */
+              overflow: hidden;
+              /* 使用省略号表示被截断的内容 */
+              text-overflow: ellipsis;
+              /* 其他样式，如行高、字体大小等 */
+              line-height: 1.2; /* 根据需要调整 */
+              font-size: 18px; /* 根据需要调整 */
+              /* 如果需要的话，可以添加一些内边距或外边距 */
+              padding-bottom: 10px;
+          }
       </style>
   </head>
 
@@ -248,38 +261,40 @@
                     </li>
                 </ul>
             </div>
-            <div style="width: 760px; margin-left: auto; margin-right: auto;">
+            <div style="width: 775px; margin-left: auto;">
                 <h3 class="h5">热门推荐</h3>
-<!--                <ul class="list-unstyled">-->
-<!--                    <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-1.jpg" alt=""></a>-->
-<!--                        <div class="media-body ms-3">-->
-<!--                            <h3 class="mb-1"><a class="reset-anchor" href="post.html">The top climbing tours</a></h3>-->
-<!--                            <p>买好机票的那个晚上 我疯狂摇着迈克擂的手，期待与兴奋使我暂时忘记曾经历10个小时洲际航线的辛苦 自年幼的第一次远行至今 我们终于！即将！抵达！地球的另一边了！ 继“ 北疆 三美游击队”</p>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-2.jpg" alt=""></a>-->
-<!--                        <div class="media-body ms-3">-->
-<!--                            <h3 class="mb-1"><a class="reset-anchor" href="post.html">Travel guide to Canada</a></h3>-->
-<!--                            <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-3.jpg" alt=""></a>-->
-<!--                        <div class="media-body ms-3">-->
-<!--                            <h3 class="mb-1"><a class="reset-anchor" href="post.html">A day in Tailand</a></h3>-->
-<!--                            <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                </ul>-->
                 <ul class="list-unstyled">
-                    <li class="d-flex mb-1" th:each="post : ${pageInfo.list}">
-<!--                        <a href="post.html"><img th:src="${post.imageUrl}" alt=""></a>-->
+                    <li class="d-flex mb-1" style="padding-bottom: 10px" th:each="post : ${pageInfo.list}">
+                        <a href="post.html"><img th:src="${post.imageUrl}" th:width="200" th:height="150" alt=""></a>
                         <div class="media-body ms-3">
-                            <h3 class="mb-1"><a class="reset-anchor" th:href="@{/post/{id}(id=${post.id})}"
-                                                th:text="${post.spotName}">Post Title</a></h3>
-<!--                            <p th:text="${post.summary}">Post Summary</p>-->
+                            <h3 class="mb-1" style="padding-bottom: 10px;"><a class="reset-anchor" th:href="@{/post/{id}(id=${post.id})}"
+                                                th:text="${post.noticeTitle}"></a></h3>
+                            <div class="text-muted" ><p th:text="${post.noticeContent}"></p></div>
                         </div>
                     </li>
                 </ul>
+                <nav aria-label="Page navigation example" style="display: flex; justify-content: flex-end;">
+                    <ul class="pagination">
+                        <!-- 上一页链接 -->
+                        <li class="page-item" th:classappend="${pageInfo.hasPreviousPage} ? 'page-item' : 'page-item disabled'">
+                            <a class="page-link" th:href="@{/spots(currentPage=${pageInfo.prePage},pageSize=${10})}"
+                               th:if="${pageInfo.hasPreviousPage}" href="#">上一页</a>
+                            <span class="page-link" th:unless="${pageInfo.hasPreviousPage}">上一页</span>
+                        </li>
+                        <!-- 页码链接 -->
+                        <li class="page-item" th:each="pageNum : ${#numbers.sequence(pageInfo.navigateFirstPage, pageInfo.navigateLastPage)}"
+                            th:classappend="${pageNum == pageInfo.pageNum} ? 'active' : ''">
+                            <a class="page-link" th:href="@{/spots(currentPage=${pageNum},pageSize=${10})}"
+                               th:text="${pageNum}"></a>
+                        </li>
+                        <!-- 下一页链接 -->
+                        <li class="page-item" th:classappend="${pageInfo.hasNextPage} ? 'page-item' : 'page-item disabled'">
+                            <a class="page-link" th:href="@{/spots(currentPage=${pageInfo.nextPage},pageSize=${10})}"
+                               th:if="${pageInfo.hasNextPage}" href="#">下一页</a>
+                            <span class="page-link" th:unless="${pageInfo.hasNextPage}">下一页</span>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </section>
@@ -288,7 +303,7 @@
         <div class="row align-items-center">
           <div class="col-lg-6 position-relative py-4"><img class="subscribe-img" src="img/subscribe-img-1.jpg" alt=""><img class="subscribe-img" src="img/subscribe-img-2.jpg" alt=""></div>
           <div class="col-lg-6">
-            <h2>Best money saving - Travel tips</h2>
+            <h2>联系我们</h2>
             <p class="text-muted mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos quidem facere aliquam, delectus, incidunt ipsum fugit deserunt ducimus quibusdam consequuntur quos numquam ipsa suscipit animi dolore. Est beatae inventore voluptas.</p>
             <form action="#">
               <div class="row gy-3 gy-lg-0">
@@ -300,7 +315,7 @@
                 </div>
               </div>
             </form>
-          </div>
+          </div>F
         </div>
       </div>
     </section>

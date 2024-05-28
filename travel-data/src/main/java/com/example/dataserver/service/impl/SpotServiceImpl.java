@@ -1,5 +1,6 @@
 package com.example.dataserver.service.impl;
 
+import com.example.dataserver.entity.Notice;
 import com.example.dataserver.entity.ScenicSpot;
 import com.example.dataserver.entity.Spot;
 import com.example.dataserver.mapper.ScenicSpotMapper;
@@ -17,5 +18,10 @@ public class SpotServiceImpl implements SpotService {
 
     public List<Spot> getSpot(){
         return spotMapper.getSpot();
-}
+    }
+
+    @Override
+    public List<Notice> getNotce() {
+        return spotMapper.getNotice();
+    }
 }
