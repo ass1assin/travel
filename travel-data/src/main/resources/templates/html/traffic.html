@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Travel | Bootstrap blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="vendor/swiper/swiper-bundle.min.css">
+    <!-- Owl Carousel -->
+<!--        <link rel="stylesheet" href="vendor/owl.carousel2/assets/owl.carousel.min.css">-->
+<!--        <link rel="stylesheet" href="vendor/owl.carousel2/assets/owl.theme.default.min.css">-->
+    <!-- Google fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,400&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .inner{
+            margin-top: 45px;
+            height: calc(100vh - 45px);
+            display: flex;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .sidebar {
+            width: 200px;
+            margin-top: 45px;
+            height: calc(100vh - 45px);
+            background-color: #F0f0f0;
+            color: #333;
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+            padding: 20px;
+            box-shadow: 1px 0 3px rgba(0,0,0,0.1);
+        }
+        .menu {
+            height: calc(100vh - 45px);
+            margin-left: 200px; /* 留出侧边栏的空间 */
+            background-color: #F0f0f0;
+            border-left: 1px solid #ddd; /* 设置左边框 */
+            border-right: 1px solid #ddd; /* 设置右边框 */
+            overflow-y: auto; /* 允许垂直滚动 */
+            background-color: #fff; /* 可选：设置背景色 */
+        }
+        .menu ul {
+            list-style-type: none;
+        }
+        .menu ul li {
+            margin-bottom: 20px; /* 每篇文章之间的间距 */
+        }
+        .menu ul li img {
+            width: 100px; /* 图片宽度 */
+            height: auto; /* 图片高度自动调整 */
+            float: left; /* 图片浮动到左侧 */
+            margin-right: 10px; /* 图片右侧留出空间 */
+        }
+        .menu ul li h4 {
+            margin: 0 0 5px 0; /* 标题与内容的间距 */
+        }
+        .menu ul li p {
+            font-size: 14px; /* 文章内容字体大小 */
+            line-height: 1.5; /* 行高 */
+        }
+        .content {
+            /*height: calc(100vh - 45px);*/
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li a {
+            text-align: center;
+            color: #333; /* 深灰色链接文本 */
+            text-decoration: none;
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd; /* 淡灰色底部边框 */
+        }
+        .sidebar ul li a:hover {
+            background-color: #e0e0e0; /* 浅灰色背景色（鼠标悬停时） */
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="py-2 bg-dark text-white">
+        <div class="container py-1">
+            <div class="row align-items-center">
+                <div class="col-lg-4">
+                    <ul class="list-inline mb-0 text-sm">
+                        <li class="list-inline-item"><a class="reset-anchor" href="#!">首页</a></li>
+                        <li class="list-inline-item">|</li>
+                        <li class="list-inline-item"><a class="reset-anchor" href="#!">目的地</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
+                    <div class="dropdown text-sm"><a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false"><i class="fas fa-globe-americas me-2"></i>个人中心</a>
+                        <div class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="destinations"><a class="dropdown-item text-sm" href="#!">登录</a><a class="dropdown-item text-sm" href="#!">注册</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="sidebar">
+    <ul>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">火车票</a></li>
+        <li><a href="#">旅游</a></li>
+        <li><a href="#">攻略</a></li>
+        <li><a href="#">景点</a></li>
+        <!-- 更多菜单项 -->
+    </ul>
+</div>
+<div class="inner">
+    <div class="menu" style="background-color: #F0f0f0;">
+        <div class="mb-5" style="padding: 20px">
+            <h4 class="h5" style="color: #5c636a">为您推荐</h4>
+            <h3 class="h5">30个最低价目的地</h3>
+            <ul class="list-unstyled">
+                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-1.jpg" alt="" width="80"></a>
+                    <div class="media-body ms-3">
+                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
+                        <h6 class="mb-1"><a class="reset-anchor" href="post.html">The top climbing tours</a></h6>
+                        <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
+                    </div>
+                </li>
+                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-2.jpg" alt="" width="80"></a>
+                    <div class="media-body ms-3">
+                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
+                        <h6 class="mb-1"><a class="reset-anchor" href="post.html">Travel guide to Canada</a></h6>
+                        <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
+                    </div>
+                </li>
+                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-3.jpg" alt="" width="80"></a>
+                    <div class="media-body ms-3">
+                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
+                        <h6 class="mb-1"><a class="reset-anchor" href="post.html">A day in Tailand</a></h6>
+                        <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <div>
+            <div id="qqmap" style="height: calc(100vh - 55px);"></div> <!-- 修改ID为"container"，并添加宽度和高度样式 -->
+        </div>
+    </div>
+</div>
+
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/swiper/swiper-bundle.min.js"></script>
+<script src="js/front.js"></script>
+<script charset="utf-8" src="https://map.qq.com/api/gljs?v=1.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    initMap();
+  });
+  function initMap() {
+    var center = new TMap.LatLng(23.504264,111.316155);
+    //初始化地图
+    var map = new TMap.Map("qqmap", {
+      rotation: 20,//设置地图旋转角度
+      pitch:30, //设置俯仰角度（0~45）
+      zoom:12,//设置地图缩放级别
+      center: center//设置地图中心点坐标
+    });
+
+    //初始marker
+    var marker = new TMap.MultiMarker({
+      id: 'marker-layer',
+      map: map,
+      styles: {
+        "marker": new TMap.MarkerStyle({
+          "width": 24,
+          "height": 35,
+          "anchor": { x: 12, y: 35 },
+          "src": 'https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/markerDefault.png'
+        })
+      },
+      geometries: [{
+        "id": 'demo1',
+        "styleId": 'marker',
+        "position": new TMap.LatLng(23.504264,111.316155),
+        "properties": {
+          "title": "marker"
+        }
+      },
+      ]
+    });
+
+    //初始化infoWindow
+    var infoWindow = new TMap.InfoWindow({
+      map: map,
+      position: new TMap.LatLng(23.504264,111.316155),
+      // content: "<div><img src='https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/em.jpg'><p>Hello World!</p></div>"
+      offset: { x: 0, y: -32 } //设置信息窗相对position偏移像素
+    });
+    infoWindow.close();//初始关闭信息窗关闭
+    //监听标注点击事件
+    marker.on("click", function (evt) {
+      //设置infoWindow
+      infoWindow.open(); //打开信息窗
+      // infoWindow.setPosition(evt.geometry.position);//设置信息窗位置
+      infoWindow.setContent(evt.geometry.content);//设置信息窗内容
+    })
+  }
+</script>
+</body>
+</html>
