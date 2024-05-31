@@ -80,6 +80,7 @@
             line-height: 1.5; /* 行高 */
         }
         .content {
+            width: calc(100vh - 100px);;
             /*height: calc(100vh - 45px);*/
         }
         .sidebar ul {
@@ -96,6 +97,35 @@
         }
         .sidebar ul li a:hover {
             background-color: #e0e0e0; /* 浅灰色背景色（鼠标悬停时） */
+        }
+        .ellipsis {
+            width: 280px;
+            white-space: nowrap; /* 防止文本换行 */
+            overflow: hidden; /* 隐藏超出容器的部分 */
+            text-overflow: ellipsis; /* 用省略号表示被隐藏的部分 */
+        }
+        .text-muted {
+            position: relative;
+            line-height: 1.5; /* 假设你的行高是1.5 */
+            height: 3em; /* 两行文本的高度（行高 * 2）*/
+            overflow: hidden;
+        }
+
+        .text-muted::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 50%; /* 高度设置为文本行高的一半 */
+            /*background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1) 50%);*/
+        }
+        .text-muted p {
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* 限制显示两行 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
 </head>
@@ -133,36 +163,23 @@
     </ul>
 </div>
 <div class="inner">
-    <div class="menu" style="background-color: #F0f0f0;">
+    <div class="menu" style="background-color: #F0f0f0;width: 500px">
         <div class="mb-5" style="padding: 20px">
             <h4 class="h5" style="color: #5c636a">为您推荐</h4>
-            <h3 class="h5">30个最低价目的地</h3>
+            <h4 class="h5">30个最低价目的地</h4>
             <ul class="list-unstyled">
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-1.jpg" alt="" width="80"></a>
+                <li class="d-flex mb-1" style="padding-bottom: 10px;overflow: hidden" th:each="post : ${pageInfo.list}">
+                    <a href="post.html"><img th:src="${post.imageUrl}" style="height: 100px" alt=""></a>
                     <div class="media-body ms-3">
-                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                        <h6 class="mb-1"><a class="reset-anchor" href="post.html">The top climbing tours</a></h6>
-                        <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
-                    </div>
-                </li>
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-2.jpg" alt="" width="80"></a>
-                    <div class="media-body ms-3">
-                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                        <h6 class="mb-1"><a class="reset-anchor" href="post.html">Travel guide to Canada</a></h6>
-                        <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
-                    </div>
-                </li>
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-3.jpg" alt="" width="80"></a>
-                    <div class="media-body ms-3">
-                        <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                        <h6 class="mb-1"><a class="reset-anchor" href="post.html">A day in Tailand</a></h6>
-                        <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
+                        <h4 class="mb-1 ellipsis" style="padding-bottom: 10px;text-overflow: hi"><a class="reset-anchor" th:href="@{/post/{id}(id=${post.id})}"
+                                                                          th:text="${post.noticeTitle}"></a></h4>
+                        <div class="text-muted" ><p th:text="${post.noticeContent}"></p></div>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="content">
+    <div class="content" style="flex: 1">
         <div>
             <div id="qqmap" style="height: calc(100vh - 55px);"></div> <!-- 修改ID为"container"，并添加宽度和高度样式 -->
         </div>

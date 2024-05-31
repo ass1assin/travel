@@ -15,6 +15,7 @@ class DataServerApplicationTests {
 @Autowired
     ScenicSpotMapper scenicSpotMapper;
 
+
     @Test
     void contextLoads() {
         ScenicSpot scenicSpot = new ScenicSpot();

@@ -70,7 +70,7 @@
   </header>
   <section class="pt-5">
     <div class="container" style="text-align: center">
-      <h1>景点推荐</h1>
+      <h1>酒店预定</h1>
     </div>
   </section>
     <!-- Hero section -->
@@ -89,93 +89,72 @@
       <div class="container pt-5">
         <div class="row mb-5">
           <div class="col-lg-8">
-            <div class="row text-center">
-              <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="img/listing-tnumbnail-3.jpg" alt=""/></a>
-                <ul class="list-inline small text-uppercase mb-0">
-                  <li class="list-inline-item me-0 text-gray align-middle">By </li>
-                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">Jimmy Roy</a></li>
-                  <li class="list-inline-item text-gray align-middle me-0">|</li>
-                  <li class="list-inline-item text-gray align-middle">22 Mar 2018</li>
-                </ul>
-                <h3 class="h4 mt-2"> <a class="reset-anchor" href="post.html">Guide to best markets</a></h3><a class="reset-anchor text-gray text-uppercase small mb-2 d-block" href="#!">Travel guide</a>
-                <p class="text-small mb-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p><a class="btn btn-link" href="index.html">Continue reading</a>
+
+<!--            <div class="row text-center" th:each="article : ${pageInfo.list}">-->
+<!--              &lt;!&ndash; 假设每行只显示一个文章，则不需要额外的col-lg-6包装 &ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-lg-6 mb-5" th:if="${pageInfo.listStat.size} % 2 != 0 || ${#lists.currentIndex} % 2 == 0">&ndash;&gt;-->
+<!--&lt;!&ndash;              <div class="col-lg-6 mb-5" th:class="${#lists.size(pageInfo.list) > 1} ? 'col-lg-4' : 'col-lg-6'">&ndash;&gt;-->
+<!--              <div class="col-lg-6 mb-5">-->
+<!--                <a href="post.html" target="_blank">-->
+<!--                  <img class="img-fluid mb-4" th:src="${article.imageUrl}" alt="" />-->
+<!--                </a>-->
+<!--                <h3 class="h4 mt-2">-->
+<!--                  <a class="reset-anchor" href="post.html" th:text="${article.hotelName}"></a>-->
+<!--                </h3>-->
+<!--                <p class="text-small mb-1" th:text="${article.hotelContent}"></p>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <div class="row text-center" th:each="article : ${pageInfo.list}">-->
+<!--              <div class="col-lg-6 mb-5">-->
+<!--                <a href="post.html" target="_blank">-->
+<!--                  <img class="img-fluid mb-4" th:src="${article.imageUrl}" alt="Article Image" />-->
+<!--                </a>-->
+<!--                <h3 class="h4 mt-2">-->
+<!--                  <a class="reset-anchor" href="post.html" th:text="${article.hotelName}"></a>-->
+<!--                </h3>-->
+<!--                <p class="text-small mb-1" th:text="${article.hotelContent}"></p>-->
+<!--              </div>-->
+<!--              <div class="col-lg-6 mb-5">-->
+<!--                <a href="post.html" target="_blank">-->
+<!--                  <img class="img-fluid mb-4" th:src="${article.imageUrl}" alt="Article Image" />-->
+<!--                </a>-->
+<!--                <h3 class="h4 mt-2">-->
+<!--                  <a class="reset-anchor" href="post.html" th:text="${article.hotelName}"></a>-->
+<!--                </h3>-->
+<!--                <p class="text-small mb-1" th:text="${article.hotelContent}"></p>-->
+<!--              </div>-->
+<!--              &lt;!&ndash; 注意：这里通常不需要第二个.col-lg-6，除非您想在同一行显示另一个元素 &ndash;&gt;-->
+<!--            </div>-->
+            <div th:each="article, iterStat : ${pageInfo.list}" class="row text-center" th:if="${!iterStat.last || iterStat.index % 2 == 0}">
+              <!-- 左边：索引为偶数或列表的最后一个元素 -->
+              <div class="col-lg-6 mb-5" th:classappend="${iterStat.index+1 % 2 != 0} ? 'order-lg-2' : ''">
+                <a th:href="@{/posts/{id}(id=${article.id})}" target="_blank">
+                  <img class="img-fluid mb-4" th:src="${article.imageUrl}" alt="Article Image" />
+                </a>
+                <h3 class="h4 mt-2">
+                  <a class="reset-anchor" th:href="@{/posts/{id}(id=${article.id})}" th:text="${article.hotelName}"></a>
+                </h3>
+                <p class="text-small mb-1" th:text="${article.hotelContent}"></p>
               </div>
-              <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="img/listing-tnumbnail-4.jpg" alt=""/></a>
-                <ul class="list-inline small text-uppercase mb-0">
-                  <li class="list-inline-item me-0 text-gray align-middle">By </li>
-                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">Jason Doe</a></li>
-                  <li class="list-inline-item text-gray align-middle me-0">|</li>
-                  <li class="list-inline-item text-gray align-middle">22 Mar 2018</li>
-                </ul>
-                <h3 class="h4 mt-2"> <a class="reset-anchor" href="post.html">A day in Tailand</a></h3><a class="reset-anchor text-gray text-uppercase small mb-2 d-block" href="#!">Travel guide</a>
-                <p class="text-small mb-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p><a class="btn btn-link" href="index.html">Continue reading</a>
-              </div>
-              <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="img/listing-tnumbnail-1.jpg" alt=""/></a>
-                <ul class="list-inline small text-uppercase mb-0">
-                  <li class="list-inline-item me-0 text-gray align-middle">By </li>
-                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">Jimmy Roy</a></li>
-                  <li class="list-inline-item text-gray align-middle me-0">|</li>
-                  <li class="list-inline-item text-gray align-middle">22 Mar 2018</li>
-                </ul>
-                <h3 class="h4 mt-2"> <a class="reset-anchor" href="post.html">The complete travel guide</a></h3><a class="reset-anchor text-gray text-uppercase small mb-2 d-block" href="#!">Travel guide</a>
-                <p class="text-small mb-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p><a class="btn btn-link" href="index.html">Continue reading</a>
-              </div>
-              <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="img/listing-tnumbnail-2.jpg" alt=""/></a>
-                <ul class="list-inline small text-uppercase mb-0">
-                  <li class="list-inline-item me-0 text-gray align-middle">By </li>
-                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">Jason Doe</a></li>
-                  <li class="list-inline-item text-gray align-middle me-0">|</li>
-                  <li class="list-inline-item text-gray align-middle">22 Mar 2018</li>
-                </ul>
-                <h3 class="h4 mt-2"> <a class="reset-anchor" href="post.html">The top climbing tours</a></h3><a class="reset-anchor text-gray text-uppercase small mb-2 d-block" href="#!">Travel guide</a>
-                <p class="text-small mb-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p><a class="btn btn-link" href="index.html">Continue reading</a>
-              </div>
-              <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="img/listing-tnumbnail-5.jpg" alt=""/></a>
-                <ul class="list-inline small text-uppercase mb-0">
-                  <li class="list-inline-item me-0 text-gray align-middle">By </li>
-                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">Jimmy Roy</a></li>
-                  <li class="list-inline-item text-gray align-middle me-0">|</li>
-                  <li class="list-inline-item text-gray align-middle">22 Mar 2018</li>
-                </ul>
-                <h3 class="h4 mt-2"> <a class="reset-anchor" href="post.html">Travel guide to Canada</a></h3><a class="reset-anchor text-gray text-uppercase small mb-2 d-block" href="#!">Travel guide</a>
-                <p class="text-small mb-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p><a class="btn btn-link" href="index.html">Continue reading</a>
-              </div>
-              <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="img/listing-tnumbnail-6.jpg" alt=""/></a>
-                <ul class="list-inline small text-uppercase mb-0">
-                  <li class="list-inline-item me-0 text-gray align-middle">By </li>
-                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">Jason Doe</a></li>
-                  <li class="list-inline-item text-gray align-middle me-0">|</li>
-                  <li class="list-inline-item text-gray align-middle">22 Mar 2018</li>
-                </ul>
-                <h3 class="h4 mt-2"> <a class="reset-anchor" href="post.html">Guide to best markets</a></h3><a class="reset-anchor text-gray text-uppercase small mb-2 d-block" href="#!">Travel guide</a>
-                <p class="text-small mb-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p><a class="btn btn-link" href="index.html">Continue reading</a>
-              </div>
-              <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="img/listing-tnumbnail-3.jpg" alt=""/></a>
-                <ul class="list-inline small text-uppercase mb-0">
-                  <li class="list-inline-item me-0 text-gray align-middle">By </li>
-                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">Jimmy Roy</a></li>
-                  <li class="list-inline-item text-gray align-middle me-0">|</li>
-                  <li class="list-inline-item text-gray align-middle">22 Mar 2018</li>
-                </ul>
-                <h3 class="h4 mt-2"> <a class="reset-anchor" href="post.html">Guide to best markets</a></h3><a class="reset-anchor text-gray text-uppercase small mb-2 d-block" href="#!">Travel guide</a>
-                <p class="text-small mb-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p><a class="btn btn-link" href="index.html">Continue reading</a>
-              </div>
-              <div class="col-lg-6 mb-5"><a href="post.html"><img class="img-fluid mb-4" src="img/listing-tnumbnail-4.jpg" alt=""/></a>
-                <ul class="list-inline small text-uppercase mb-0">
-                  <li class="list-inline-item me-0 text-gray align-middle">By </li>
-                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">Jimmy Roy</a></li>
-                  <li class="list-inline-item text-gray align-middle me-0">|</li>
-                  <li class="list-inline-item text-gray align-middle">22 Mar 2018</li>
-                </ul>
-                <h3 class="h4 mt-2"> <a class="reset-anchor" href="post.html">A day in Tailand</a></h3><a class="reset-anchor text-gray text-uppercase small mb-2 d-block" href="#!">Travel guide</a>
-                <p class="text-small mb-1">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</p><a class="btn btn-link" href="index.html">Continue reading</a>
+
+              <!-- 右边：仅当索引为奇数时显示 -->
+              <div class="col-lg-6 mb-5" th:if="${!iterStat.last && iterStat.index+1 % 2 != 0}">
+                <!-- 假设下一个元素存在，因为我们已经通过th:if排除了列表的最后一个元素 -->
+                <a th:href="@{/posts/{id}(id=${pageInfo.list[iterStat.index + 1].id})}" target="_blank">
+                  <img class="img-fluid mb-4" th:src="${pageInfo.list[iterStat.index + 1].imageUrl}" alt="Article Image" />
+                </a>
+                <h3 class="h4 mt-2">
+                  <a class="reset-anchor" th:href="@{/posts/{id}(id=${pageInfo.list[iterStat.index + 1].id})}" th:text="${pageInfo.list[iterStat.index + 1].hotelName}"></a>
+                </h3>
+                <p class="text-small mb-1" th:text="${pageInfo.list[iterStat.index + 1].hotelContent}"></p>
               </div>
             </div>
             <!-- Listing navigation -->
             <div class="p-4 bg-light mb-5">
               <div class="row gy-2">
-                <div class="col-sm-6 text-center text-sm-start"><a class="btn btn-outline-secondary btn-sm" href="#!"><i class="fas fa-angle-left me-2"></i>Prev posts</a></div>
-                <div class="col-sm-6 text-center text-sm-end"><a class="btn btn-outline-secondary btn-sm" href="#!">Next posts<i class="fas fa-angle-right ms-2"></i></a></div>
+                <div class="col-sm-6 text-center text-sm-start"><a class="btn btn-outline-secondary btn-sm" href="#!"><i class="fas fa-angle-left me-2"></i>上一页</a></div>
+                <div class="col-sm-6 text-center text-sm-end"><a class="btn btn-outline-secondary btn-sm" href="#!">下一页<i class="fas fa-angle-right ms-2"></i></a></div>
               </div>
             </div>
           </div>
@@ -183,35 +162,29 @@
           <div class="col-lg-4">
 
             <div class="mb-5 text-center"><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/category-1.jpg)">
-                <p class="category-title text-uppercase small">Lifestyle</p></a><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/category-2.jpg)">
-                <p class="category-title text-uppercase small">Travel</p></a><a class="category reset-anchor bg-cover bg-center" href="#!" style="background: url(img/category-3.jpg)">
-                <p class="category-title text-uppercase small">Vacation</p></a></div>
+                <p class="category-title text-uppercase small">入住获奖酒店</p></a><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/category-2.jpg)">
+                <p class="category-title text-uppercase small">当季热推</p></a><a class="category reset-anchor bg-cover bg-center" href="#!" style="background: url(img/category-3.jpg)">
+                <p class="category-title text-uppercase small">企业商旅</p></a></div>
 
             <!-- Latest posts widget -->
             <div class="mb-5">
-              <h3 class="h5">Latest posts</h3>
-              <p class="text-sm text-muted mb-4">Lorem ipsum dolor sit, consectetur adipisicing elit, sed do eiusmod.</p>
+              <div style="display: flex;justify-content: space-between;">
+                <span><h3 class="h5">旅游攻略推荐</h3></span>
+                <span style="color: #5c636a">更多</span>
+              </div>
+              <div>
+                <img class="img-fluid" src="img/liangyusheng.jpg" alt="">
+              </div>
+              <h4 class="h5" style="margin-top: 20px">最新资讯</h4>
               <ul class="list-unstyled">
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-1.jpg" alt="" width="80"></a>
-                  <div class="media-body ms-3">
-                    <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                    <h6 class="mb-1"><a class="reset-anchor" href="post.html">The top climbing tours</a></h6>
-                    <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
-                  </div>
+                <li class="d-flex mb-1" style="overflow: hidden;">
+                  <p>02月19日科技"战密”∶马蜂窝大数据赋能旅游业等你来</p>
                 </li>
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-2.jpg" alt="" width="80"></a>
-                  <div class="media-body ms-3">
-                    <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                    <h6 class="mb-1"><a class="reset-anchor" href="post.html">Travel guide to Canada</a></h6>
-                    <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
-                  </div>
+                <li class="d-flex mb-1">
+                  <p>02月13日陈罡:控情下旅游业的“守恒与求变等着你</p>
                 </li>
-                <li class="d-flex mb-1"><a href="post.html"><img src="img/recent-posts-thumb-3.jpg" alt="" width="80"></a>
-                  <div class="media-body ms-3">
-                    <p class="small text-primary text-uppercase mb-0">5 Aug 2018</p>
-                    <h6 class="mb-1"><a class="reset-anchor" href="post.html">A day in Tailand</a></h6>
-                    <p class="small text-muted">Lorem ipsum dolor sit, consectetur adipisicing elit, sed.</p>
-                  </div>
+                <li class="d-flex mb-1">
+                  <p>02月06日马蜂窝将退订完成率定为最高KPI</p>
                 </li>
               </ul>
             </div>
@@ -219,37 +192,18 @@
         </div>
       </div>
     </section>
-    <footer class="bg-dark py-4">
-      <div class="container">
-        <div class="row py-2 gy-2">
-          <div class="col-lg-4 text-center text-lg-start">
-            <p class="small text-muted text-uppercase mb-0">&copy; copyright - all rights reserved</p>
-          </div>
-          <div class="col-lg-4 text-center">
-            <ul class="list-inline text-white small mb-0">
-              <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-facebook-f"></i></a></li>
-              <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-twitter"></i></a></li>
-              <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-instagram"></i></a></li>
-              <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-youtube"></i></a></li>
-              <li class="list-inline-item"><a class="reset-anchor" href="#!"><i class="fab fa-vimeo-v"></i></a></li>
-            </ul>
-          </div>
-          <div class="col-lg-4 text-center text-lg-end">
-            <p class="small text-muted text-uppercase mb-0"><a target="_blank" href="http://www.mobanwang.com/" title="网页模板">网页模板</a>. </p>
-          </div>
-        </div>
+  <footer class="bg-dark py-4">
+    <div class="container">
+      <div class="row py-2 gy-2">
+
       </div>
-    </footer>
+    </div>
+  </footer>
     <!-- JavaScript files-->
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/swiper/swiper-bundle.min.js"></script>
     <script src="js/front.js"></script>
     <script>
-      // ------------------------------------------------------- //
-      //   Inject SVG Sprite -
-      //   see more here
-      //   https://css-tricks.com/ajaxing-svg-sprite/
-      // ------------------------------------------------------ //
       function injectSvgSprite(path) {
 
           var ajax = new XMLHttpRequest();
@@ -262,10 +216,6 @@
           document.body.insertBefore(div, document.body.childNodes[0]);
           }
       }
-      // this is set to BootstrapTemple website as you cannot
-      // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
-      // while using file:// protocol
-      // pls don't forget to change to your domain :)
       injectSvgSprite('icons/orion-svg-sprite.svg');
 
     </script>
