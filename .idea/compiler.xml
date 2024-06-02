@@ -9,9 +9,13 @@
         <module name="travel-gateway" />
         <module name="travel-user" />
         <module name="travel-data" />
-        <module name="eureka-server" />
+        <module name="travel-web" />
+        <module name="travel-common" />
         <module name="travel-framework" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="eureka-server" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,7 +1,6 @@
 package com.example.dataserver.service;
 
-import com.example.dataserver.entity.Hotel;
-import com.example.dataserver.entity.Spot;
+import com.example.model.Hotel;
 
 import java.util.List;
 

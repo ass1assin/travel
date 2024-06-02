@@ -1,7 +1,7 @@
 package com.example.dataserver.mapper;
 
-import com.example.dataserver.entity.ScenicSpot;
 import org.apache.ibatis.annotations.Mapper;
+import com.example.model.ScenicSpot;
 
 import java.util.List;
 

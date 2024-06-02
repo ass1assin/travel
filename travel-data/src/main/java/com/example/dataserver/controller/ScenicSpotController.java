@@ -1,7 +1,8 @@
 package com.example.dataserver.controller;
 
-import com.example.dataserver.entity.ScenicSpot;
+
 import com.example.dataserver.service.ScenicSpotService;
+import com.example.model.ScenicSpot;
 import com.example.travelframework.utils.AjaxResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

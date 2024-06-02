@@ -1,6 +1,7 @@
 package com.example.dataserver.service;
 
-import com.example.dataserver.entity.ScenicSpot;
+
+import com.example.model.ScenicSpot;
 
 import java.util.List;
 

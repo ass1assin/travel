@@ -1,11 +1,9 @@
 package com.example.dataserver.service.impl;
 
-import com.example.dataserver.entity.Notice;
-import com.example.dataserver.entity.ScenicSpot;
-import com.example.dataserver.entity.Spot;
-import com.example.dataserver.mapper.ScenicSpotMapper;
 import com.example.dataserver.mapper.SpotMapper;
 import com.example.dataserver.service.SpotService;
+import com.example.model.Notice;
+import com.example.model.Spot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

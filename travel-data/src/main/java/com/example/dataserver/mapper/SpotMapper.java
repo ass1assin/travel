@@ -1,9 +1,8 @@
 package com.example.dataserver.mapper;
 
-import com.example.dataserver.entity.Notice;
-import com.example.dataserver.entity.ScenicSpot;
-import com.example.dataserver.entity.Spot;
 import org.apache.ibatis.annotations.Mapper;
+import com.example.model.Notice;
+import com.example.model.Spot;
 
 import java.util.List;
 

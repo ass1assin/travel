@@ -23,6 +23,11 @@ const routes = [
     path: '/traffic_manage',
     name: 'traffic_manage',
     component: () => import('../views/admin/traffic_manage')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/common/login')
   }
 ]
 

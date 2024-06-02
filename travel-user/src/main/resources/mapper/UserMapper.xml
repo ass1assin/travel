@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.userserver.mapper.UserMapper">
+    <resultMap type="com.example.model.User" id="UserResult">
+        <id     property="userId"         column="user_id"        />
+        <result property="userName"       column="user_name"      />
+        <result property="passWord"       column="user_password"      />
+    </resultMap>
+    <select id="findInfo" resultMap="UserResult">
+        select * from sys_user where user_name= #{username} and user_password = #{password}
+    </select>
+
+    <select id="register" resultMap="UserResult">
+      INSERT INTO sys_user (user_name,user_password)
+      VALUES (#{username},#{password})
+    </select>
+</mapper>

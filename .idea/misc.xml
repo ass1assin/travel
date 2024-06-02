@@ -8,7 +8,6 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/eureka-server/pom.xml" />
         <option value="$PROJECT_DIR$/user-server/pom.xml" />
         <option value="$PROJECT_DIR$/gateway-server/pom.xml" />
         <option value="$PROJECT_DIR$/data-server/pom.xml" />

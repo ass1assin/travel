@@ -20,10 +20,12 @@
 
   <modules>
     <module>travel-data</module>
-    <module>eureka-server</module>
+<!--    <module>eureka-server</module>-->
     <module>travel-user</module>
     <module>travel-gateway</module>
     <module>travel-framework</module>
+      <module>travel-web</module>
+      <module>travel-common</module>
   </modules>
   <packaging>pom</packaging>
 

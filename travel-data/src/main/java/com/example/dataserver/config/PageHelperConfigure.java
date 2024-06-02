@@ -15,6 +15,7 @@ public class PageHelperConfigure {
     public PageInterceptor pageInterceptor() {
         PageInterceptor pageInterceptor = new PageInterceptor();
         Properties properties = new Properties();
+        pageInterceptor.setProperties(properties);
         return pageInterceptor;
     }
 }

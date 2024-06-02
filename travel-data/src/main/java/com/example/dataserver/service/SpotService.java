@@ -1,8 +1,8 @@
 package com.example.dataserver.service;
 
-import com.example.dataserver.entity.Notice;
-import com.example.dataserver.entity.ScenicSpot;
-import com.example.dataserver.entity.Spot;
+
+import com.example.model.Notice;
+import com.example.model.Spot;
 
 import java.util.List;
 
