@@ -8,8 +8,8 @@
         <result property="userName"       column="user_name"      />
         <result property="passWord"       column="user_password"      />
     </resultMap>
-    <select id="findInfo" resultMap="UserResult">
-        select * from sys_user where user_name= #{username} and user_password = #{password}
+    <select id="findInfo" resultMap="UserResult" parameterType="map">
+        SELECT * FROM sys_user WHERE user_name = #{param1} AND user_password = #{param2}
     </select>
 
     <select id="register" resultMap="UserResult">

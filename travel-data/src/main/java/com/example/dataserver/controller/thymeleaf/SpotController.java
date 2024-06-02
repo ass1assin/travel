@@ -17,18 +17,6 @@ public class SpotController {
 
     @Autowired
     private SpotService spotService;
-
-//    @GetMapping("/spots")
-//    public ModelAndView getSpot(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
-//                                @RequestParam(defaultValue = "10") int pageSize    // 默认为每页10条
-//    ) {
-//        ModelAndView modelAndView = new ModelAndView("html/index");
-//        PageHelper.startPage(currentPage, pageSize);
-//        List<Notice> list = spotService.getNotce();
-//        PageInfo<Notice> pageInfo = new PageInfo<>(list);
-//        modelAndView.addObject("pageInfo", pageInfo);
-//        return modelAndView;
-//    }
       @GetMapping("/spots")
       public PageInfo<Notice> getSpots(@RequestParam(defaultValue = "1") int currentPage,
                                               @RequestParam(defaultValue = "10") int pageSize) {

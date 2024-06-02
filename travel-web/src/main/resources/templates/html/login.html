@@ -4,71 +4,54 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="css/bootstrap.min.css?v=3.3.7" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
-</head>
-<body>
-
-</body>
-</html>a<!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <title>上网登录页</title>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
     <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
-
     <style>
         body {
+            background-image: url('/img/login.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             background-color: #f3f3f4;
         }
-
+        .loginscreen.middle-box {
+            width: 400px;
+        }
         .middle-box {
             margin-top: 50px;
-            max-width: 400px;
+            height: 370px;
             padding: 30px;
             background: #fff;
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
-
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
-
         .form-control {
             height: 40px;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
         }
-
         .btn-primary {
             background-color: #337ab7;
             color: #fff;
         }
-
         .btn-primary:hover {
             background-color: #286090;
         }
-
         .text-center {
             text-align: center;
         }
     </style>
 </head>
-
-<body class="gray-bg">
-
+<body class="gray-bg" src="img/watertown.jpg">
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div>
         <form class="m-t" role="form" action="/login" method="post">
