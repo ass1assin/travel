@@ -18,17 +18,6 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-//    @GetMapping("/hotel")
-//    public ModelAndView getSpot(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
-//                                @RequestParam(defaultValue = "10") int pageSize    // 默认为每页10条
-//    ) {
-//        ModelAndView modelAndView = new ModelAndView("html/listing");
-//        PageHelper.startPage(currentPage, pageSize);
-//        List<Hotel> list = hotelService.getHotel();
-//        PageInfo<Hotel> pageInfo = new PageInfo<>(list);
-//        modelAndView.addObject("pageInfo", pageInfo);
-//        return modelAndView;
-//    }
     @GetMapping("/hotel")
     public PageInfo<Hotel> getTrafficSpots(@RequestParam(defaultValue = "1") int currentPage,
                                             @RequestParam(defaultValue = "10") int pageSize) {

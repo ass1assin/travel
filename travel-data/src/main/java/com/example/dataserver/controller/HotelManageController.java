@@ -1,7 +1,10 @@
 package com.example.dataserver.controller;
 
 
+import com.example.dataserver.service.HotelManageService;
+import com.example.dataserver.service.HotelService;
 import com.example.dataserver.service.ScenicSpotService;
+import com.example.model.Hotel;
 import com.example.model.ScenicSpot;
 import com.example.travelframework.utils.AjaxResult;
 import com.github.pagehelper.PageHelper;
@@ -13,15 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class ScenicSpotController {
+public class HotelManageController {
     @Autowired
-    public ScenicSpotService scenicSpotService;
+    public HotelManageService hotelManageService;
 
-    @GetMapping("/getAllSpot")
+    @GetMapping("/getAllHotel")
     public AjaxResult getAllSpot(ScenicSpot scenicSpot){
         PageHelper.startPage(scenicSpot.getCurrentPage(), scenicSpot.getPageSize());
-        List<ScenicSpot> list = scenicSpotService.getAllSpot();
-        PageInfo<ScenicSpot> pageInfo = new PageInfo<>(list);
+        List<Hotel> list = hotelManageService.getAllHotel();
+        PageInfo<Hotel> pageInfo = new PageInfo<>(list);
         return AjaxResult.success(pageInfo);
     }
 }

@@ -4,7 +4,7 @@ export function getAllSpot(data){
   return request({
     url:'/getAllSpot',
     method: 'get',
-    data:data
+    params: data
   })
 }
 

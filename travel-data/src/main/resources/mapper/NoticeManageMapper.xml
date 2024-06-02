@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.dataserver.mapper.NoticeManageMapper">
+    <resultMap type="com.example.model.Notice" id="NoticeResult">
+        <id     property="id"         column="id"        />
+        <result property="noticeTitle"       column="notice_title"      />
+        <result property="noticeContent"       column="notice_content"      />
+        <result property="imageUrl"       column="image_url"      />
+    </resultMap>
+    <select id="getAllNotice" resultMap="NoticeResult">
+        select * from scenic_notice
+    </select>
+</mapper>

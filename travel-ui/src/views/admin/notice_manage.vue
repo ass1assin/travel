@@ -13,6 +13,7 @@
       </el-form-item>
     </el-form>
 
+
     <el-row>
       <el-col :span="1" style="margin-right: 10px">
         <el-button type="success" plain @click="add()" size="mini" style="margin: 0px 0px 10px 10px">新增</el-button>
@@ -72,12 +73,6 @@
         <el-form-item label="琴房类型">
           <el-input v-model="formData.type"></el-input>
         </el-form-item>
-        <!--        <el-select v-model="formData.openIda" placeholder="请选择上午时间"  @visible-change="handleAmTimeChange(1)">-->
-        <!--          <el-option v-for="time in allTimes" :key="time.openId" :label="formatTimeRange(time.openTime,time.closeTime)" :value="time.openId"></el-option>-->
-        <!--        </el-select>-->
-        <!--        <el-select v-model="formData.openIdp" placeholder="请选择下午时间"  @visible-change="handleAmTimeChange(2)">-->
-        <!--          <el-option v-for="time in allTimes" :key="time.openId" :label="formatTimeRange(time.openTime,time.closeTime)" :value="time.openId"></el-option>-->
-        <!--        </el-select>-->
 
         <el-form-item  style="text-align: right;">
           <el-button type="primary" @click="handedit">确定</el-button>
@@ -85,55 +80,37 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-
     <!--表格展示内容-->
     <el-table
         :data="dataList"
         style="width: 100%;" :row-class-name="setClassName">
       <!--收缩行-->
       <!--展示行-->
-      <el-table-column label="编号" align="center">
+      <el-table-column label="编号" align="center" prop="id">
         <template slot-scope="scope">
           {{ scope.row.id || '暂无数据' }}
         </template>
       </el-table-column>
 
-<!--      <el-table-column label="预约时间" align="center" prop="address">-->
-<!--        <template slot-scope="scope">-->
-<!--          {{ formatTime(scope.row.resTime) || '暂无数据' }}-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-
-<!--      <el-table-column label="开始时间" align="center" prop="type">-->
-<!--        <template slot-scope="scope">-->
-<!--          &lt;!&ndash;          {{ scope.row.startTime || '暂无数据' }}&ndash;&gt;-->
-<!--          {{ formatTime(scope.row.startTime) || '暂无数据' }}-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-
-<!--      <el-table-column label="结束时间" align="center" prop="openTime">-->
-<!--        <template slot-scope="scope">-->
-<!--          {{ formatTime(scope.row.endTime) || '暂无数据' }}-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-
-      <el-table-column label="景点名称" align="center">
+      <el-table-column label="图片" align="center" prop="imageUrl">
         <template slot-scope="scope">
-          {{ scope.row.spotName || '暂无数据' }}
+          {{ scope.row.imageUrl || '暂无数据' }}
         </template>
       </el-table-column>
 
-<!--      <el-table-column label="琴房地址" align="center" prop="type">-->
-<!--        <template slot-scope="scope">-->
-<!--          {{ scope.row.address || '暂无数据' }}-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-<!--      <el-table-column label="学生证编号" align="center" prop="type">-->
-<!--        <template slot-scope="scope">-->
-<!--          {{ scope.row.stucardId || '暂无数据' }}-->
+      <el-table-column label="酒店名称" align="center" prop="noticeTitle">
+        <template slot-scope="scope">
+          {{ scope.row.noticeTitle || '暂无数据' }}
+        </template>
+      </el-table-column>
 
-<!--        </template>-->
-<!--      </el-table-column>-->
+      <el-table-column label="介绍" align="center" prop="noticeContent">
+        <template slot-scope="scope">
+          <!--          {{ scope.row.startTime || '暂无数据' }}-->
+          {{ scope.row.noticeContent || '暂无数据' }}
+        </template>
+      </el-table-column>
+
 
       <el-table-column label="操作" align="center" min-width="160">
         <template slot-scope="scope">
@@ -143,8 +120,6 @@
       </el-table-column>
 
     </el-table>
-    <!--    分页-->
-    <!--    <pagination :current-page.sync="currentPage" :total-pages.sync="totalPages"/>-->
     <pagination
         :pagesize="queryParams.pageSize"
         :current-page.sync="queryParams.currentPage"
@@ -156,13 +131,13 @@
 
 <script>
 import Pagination from "@/components/pagination/pagination.vue";
-import { getAllSpot, test } from '@/api';
+import { getAllNotice } from '@/api/noticemanage';
 
 export default {
   components: {
     Pagination,
   },
-  name: "index_manage",
+  name: "notice_manage",
   data(){
     return {
       dataList: [],
@@ -191,7 +166,7 @@ export default {
     },
     getList() {
       this.loading = true
-      getAllSpot(this.queryParams).then((res) => {
+      getAllNotice(this.queryParams).then((res) => {
         console.log("%o",res);
         this.dataList = res.data.list;
         this.total = res.data.total
@@ -325,3 +300,4 @@ export default {
 }
 
 </style>
+

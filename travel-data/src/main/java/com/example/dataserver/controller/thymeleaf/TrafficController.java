@@ -17,17 +17,6 @@ public class TrafficController {
     @Autowired
     private SpotService spotService;
 
-//    @GetMapping("/trafficSpots")
-//    public ModelAndView getTrafficSpot(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
-//                                @RequestParam(defaultValue = "10") int pageSize    // 默认为每页10条
-//    ) {
-//        ModelAndView modelAndView = new ModelAndView("html/traffic");
-//        PageHelper.startPage(currentPage, pageSize);
-//        List<Notice> list = spotService.getNotce();
-//        PageInfo<Notice> pageInfo = new PageInfo<>(list);
-//        modelAndView.addObject("pageInfo", pageInfo);
-//        return modelAndView;
-//    }
       @GetMapping("/trafficSpots")
       public PageInfo<Notice> getTrafficSpots(@RequestParam(defaultValue = "1") int currentPage,
                                               @RequestParam(defaultValue = "10") int pageSize) {

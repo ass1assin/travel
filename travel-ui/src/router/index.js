@@ -25,10 +25,10 @@ const routes = [
     component: () => import('../views/admin/traffic_manage')
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import('../views/common/login')
-  }
+    path: '/notice_manage',
+    name: 'notice_manage',
+    component: () => import('../views/admin/notice_manage')
+  },
 ]
 
 const router = new VueRouter({
