@@ -17,7 +17,7 @@ public class TrafficController {
     @GetMapping("/trafficSpots")
     public ModelAndView getTrafficSpot(@RequestParam(defaultValue = "1") int currentPage,
                                        @RequestParam(defaultValue = "10") int pageSize) {
-        ModelAndView modelAndView = new ModelAndView("html/traffic");
+        ModelAndView modelAndView = new ModelAndView("traffic");
         PageInfo<Notice> pageInfo = trafficDataClient.getTrafficSpots(currentPage, pageSize);
         modelAndView.addObject("pageInfo", pageInfo);
         return modelAndView;

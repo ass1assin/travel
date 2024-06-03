@@ -40,8 +40,8 @@
         }
         .sidebar {
             width: 200px;
-            margin-top: 45px;
-            height: calc(100vh - 45px);
+            margin-top: 90px;
+            height: calc(100vh - 90px);
             background-color: #F0f0f0;
             color: #333;
             position: fixed;
@@ -118,8 +118,7 @@
             right: 0;
             width: 100%;
             height: 50%; /* 高度设置为文本行高的一半 */
-            /*background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1) 50%);*/
-        }
+            }
         .text-muted p {
             display: -webkit-box;
             -webkit-line-clamp: 2; /* 限制显示两行 */
@@ -132,6 +131,7 @@
             background: #F0f0f0;
             width:350px;
             padding: 20px;
+            margin-top: 80px;
             z-index: 9999;
             margin-left: 20px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -139,28 +139,7 @@
     </style>
 </head>
 <body>
-<header class="header">
-    <div class="py-2 bg-dark text-white">
-        <div class="container py-1">
-            <div class="row align-items-center">
-                <div class="col-lg-4">
-                    <ul class="list-inline mb-0 text-sm">
-                        <li class="list-inline-item"><a class="reset-anchor" href="#!">首页</a></li>
-                        <li class="list-inline-item">|</li>
-                        <li class="list-inline-item"><a class="reset-anchor" href="#!">目的地</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
-                    <div class="dropdown text-sm"><a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false"><i class="fas fa-globe-americas me-2"></i>个人中心</a>
-                        <div class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="destinations"><a class="dropdown-item text-sm" href="#!">登录</a><a class="dropdown-item text-sm" href="#!">注册</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
+<th:block th:replace="header :: header" />
 <div class="sidebar">
     <ul>
         <li><a href="#">机票</a></li>
@@ -173,7 +152,7 @@
 </div>
 <div class="inner">
     <div class="menu" style="background-color: #F0f0f0;width: 500px">
-        <div class="mb-5" style="padding: 20px">
+        <div class="mb-5" style="padding: 20px;margin-top: 80px">
             <h4 class="h5" style="color: #5c636a">为您推荐</h4>
             <h4 class="h5">30个最低价目的地</h4>
             <ul class="list-unstyled">
@@ -202,60 +181,8 @@
 <script src="vendor/swiper/swiper-bundle.min.js"></script>
 <script src="js/front.js"></script>
 <script charset="utf-8" src="https://map.qq.com/api/gljs?v=1.exp&libraries=service&key=UGDBZ-VWVEZ-EVIXJ-7GOVT-RDKIF-3IFP7"></script>
-<!--<script charset="utf-8" src="https://map.qq.com/api/gljs?v=1.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77"></script>-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <script>
-  // document.addEventListener('DOMContentLoaded', (event) => {
-  //   initMap();
-  // });
-  // function initMap() {
-  //   var center = new TMap.LatLng(23.504264,111.316155);
-  //   //初始化地图
-  //   var map = new TMap.Map("qqmap", {
-  //     rotation: 20,//设置地图旋转角度
-  //     pitch:30, //设置俯仰角度（0~45）
-  //     zoom:12,//设置地图缩放级别
-  //     center: center//设置地图中心点坐标
-  //   });
-  //   //初始marker
-  //   var marker = new TMap.MultiMarker({
-  //     id: 'marker-layer',
-  //     map: map,
-  //     styles: {
-  //       "marker": new TMap.MarkerStyle({
-  //         "width": 24,
-  //         "height": 35,
-  //         "anchor": { x: 12, y: 35 },
-  //         "src": 'https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/markerDefault.png'
-  //       })
-  //     },
-  //     geometries: [{
-  //       "id": 'demo1',
-  //       "styleId": 'marker',
-  //       "position": new TMap.LatLng(23.504264,111.316155),
-  //       "properties": {
-  //         "title": "marker"
-  //       }
-  //     },
-  //     ]
-  //   });
-  //
-  //   //初始化infoWindow
-  //   var infoWindow = new TMap.InfoWindow({
-  //     map: map,
-  //     position: new TMap.LatLng(23.504264,111.316155),
-  //     // content: "<div><img src='https://mapapi.qq.com/web/lbs/javascriptGL/demo/img/em.jpg'><p>Hello World!</p></div>"
-  //     offset: { x: 0, y: -32 } //设置信息窗相对position偏移像素
-  //   });
-  //   infoWindow.close();//初始关闭信息窗关闭
-  //   //监听标注点击事件
-  //   marker.on("click", function (evt) {
-  //     //设置infoWindow
-  //     infoWindow.open(); //打开信息窗
-  //     // infoWindow.setPosition(evt.geometry.position);//设置信息窗位置
-  //     infoWindow.setContent(evt.geometry.content);//设置信息窗内容
-  //   })
-  // }
   var map = new TMap.Map('qqmap', {
     zoom: 14,
     center: new TMap.LatLng(23.504264,111.316155),

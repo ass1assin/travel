@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>头部模板</title>
+</head>
+<body>
+<div th:fragment="header">
+  <header class="header">
+    <!-- Top bar -->
+    <div class="py-2 bg-dark text-white">
+      <div class="container py-1">
+        <div class="row align-items-center">
+          <div class="col-lg-4">
+            <ul class="list-inline mb-0 text-sm">
+              <li class="list-inline-item"><a class="reset-anchor" th:href="@{/spots}">首页</a></li>
+              <li class="list-inline-item">|</li>
+              <li class="list-inline-item"><a class="reset-anchor" href="#">目的地</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
+            <div class="dropdown text-sm"><a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false"><i class="fas fa-globe-americas me-2"></i>个人中心</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navbar 2 -->
+    <nav class="navbar navbar-expand-lg navbar-light border-gray py-2 bg-light">
+      <div class="container">
+        <button class="navbar-toggler navbar-toggler-right mx-auto border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item px-1">
+              <a class="nav-link active" th:href="@{/spots}">景点</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link" th:href="@{/hotel}">酒店</a>
+            </li>
+            <li class="nav-item px-1">
+              <a class="nav-link" th:href="@{/trafficSpots}">交通</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+</div>
+</body>
+</html>

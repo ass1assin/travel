@@ -19,7 +19,7 @@ public class HotelController {
     public ModelAndView getSpot(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
                                 @RequestParam(defaultValue = "10") int pageSize    // 默认为每页10条
     ) {
-        ModelAndView modelAndView = new ModelAndView("html/listing");
+        ModelAndView modelAndView = new ModelAndView("listing");
         PageInfo<Hotel> pageInfo = hotelDataClient.getHotel(currentPage, pageSize);
         modelAndView.addObject("pageInfo", pageInfo);
         return modelAndView;

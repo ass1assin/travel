@@ -22,7 +22,7 @@ public class SpotController {
     public ModelAndView getSpot(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
                                 @RequestParam(defaultValue = "10") int pageSize    // 默认为每页10条
     ) {
-        ModelAndView modelAndView = new ModelAndView("html/index");
+        ModelAndView modelAndView = new ModelAndView("index");
         PageInfo<Notice> pageInfo = spotDataClient.getSpots(currentPage, pageSize);
         modelAndView.addObject("pageInfo", pageInfo);
         return modelAndView;

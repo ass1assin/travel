@@ -37,21 +37,15 @@
         <el-form-item label="学号">
           <el-input v-model="formData.id"></el-input>
         </el-form-item>
-<!--        <el-form-item label="姓名">-->
-<!--          <el-input v-model="formData.stuName"></el-input>-->
-<!--        </el-form-item>-->
-<!--        &lt;!&ndash;        <el-form-item label="性别" >&ndash;&gt;-->
-<!--        &lt;!&ndash;          <el-input v-model="formData.sex"></el-input>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </el-form-item>&ndash;&gt;-->
-<!--        <el-form-item label="性别">-->
-<!--          <el-radio-group v-model="formData.sex">-->
-<!--            <el-radio label="男"></el-radio>-->
-<!--            <el-radio label="女"></el-radio>-->
-<!--          </el-radio-group>-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="密码" >-->
-<!--          <el-input v-model="formData.password"></el-input>-->
-<!--        </el-form-item>-->
+        <el-form-item label="图片">
+          <el-input v-model="formData.imageUrl"></el-input>
+        </el-form-item>
+        <el-form-item label="酒店名称" >
+          <el-input v-model="formData.hotelName"></el-input>
+        </el-form-item>
+        <el-form-item label="介绍" >
+          <el-input v-model="formData.hotelContent"></el-input>
+        </el-form-item>
         <el-form-item  style="text-align: right;">
           <el-button type="primary" @click="handadd">确定</el-button>
           <el-button @click="dialogadd = false">取消</el-button>
@@ -63,21 +57,18 @@
 
     <el-dialog  :visible.sync="dialogFormVisible">
       <el-form ref="form" :model="formData" label-width="80px">
-        <el-form-item label="琴房编号">
-          <el-input v-model="formData.proomId" readonly></el-input>
+        <el-form-item label="编号">
+          <el-input v-model="formData.id" readonly></el-input>
         </el-form-item>
-        <el-form-item label="琴房地址">
-          <el-input v-model="formData.address"></el-input>
+        <el-form-item label="图片">
+          <el-input v-model="formData.imageUrl"></el-input>
         </el-form-item>
-        <el-form-item label="琴房类型">
-          <el-input v-model="formData.type"></el-input>
+        <el-form-item label="酒店名称">
+          <el-input v-model="formData.hotelName"></el-input>
         </el-form-item>
-        <!--        <el-select v-model="formData.openIda" placeholder="请选择上午时间"  @visible-change="handleAmTimeChange(1)">-->
-        <!--          <el-option v-for="time in allTimes" :key="time.openId" :label="formatTimeRange(time.openTime,time.closeTime)" :value="time.openId"></el-option>-->
-        <!--        </el-select>-->
-        <!--        <el-select v-model="formData.openIdp" placeholder="请选择下午时间"  @visible-change="handleAmTimeChange(2)">-->
-        <!--          <el-option v-for="time in allTimes" :key="time.openId" :label="formatTimeRange(time.openTime,time.closeTime)" :value="time.openId"></el-option>-->
-        <!--        </el-select>-->
+        <el-form-item label="介绍">
+          <el-input v-model="formData.hotelContent"></el-input>
+        </el-form-item>
 
         <el-form-item  style="text-align: right;">
           <el-button type="primary" @click="handedit">确定</el-button>

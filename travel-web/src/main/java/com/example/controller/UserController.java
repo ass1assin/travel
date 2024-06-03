@@ -19,7 +19,7 @@ public class UserController {
     @GetMapping("/login")
     public ModelAndView showLoginPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/html/login");
+        modelAndView.setViewName("/login");
         return modelAndView;
     }
     @PostMapping("/login")
@@ -31,7 +31,7 @@ public class UserController {
                 if (user == null) {
                     // 用户名或密码错误返回登录界面
                     modelAndView.addObject("error", "用户名或密码输入错误");
-                    modelAndView.setViewName("/html/login");
+                    modelAndView.setViewName("/login");
                 } else {
                     modelAndView.setViewName("redirect:/spots");
                 }
@@ -41,9 +41,9 @@ public class UserController {
                 if ("already_registered".equals(result)) {
                     // 用户名或密码错误返回登录界面
                     modelAndView.addObject("error", "已经注册过了");
-                    modelAndView.setViewName("/html/login");
+                    modelAndView.setViewName("/login");
                 } else if ("registration_success".equals(result)) {
-                    modelAndView.setViewName("/html/index");
+                    modelAndView.setViewName("/index");
                     // 登录成功
                 }
                 break;
