@@ -17,7 +17,7 @@ public class TrafficController {
     @Autowired
     private SpotService spotService;
 
-      @GetMapping("/trafficSpots")
+      @GetMapping("/getTrafficSpots")
       public PageInfo<Notice> getTrafficSpots(@RequestParam(defaultValue = "1") int currentPage,
                                               @RequestParam(defaultValue = "10") int pageSize) {
           PageHelper.startPage(currentPage, pageSize);

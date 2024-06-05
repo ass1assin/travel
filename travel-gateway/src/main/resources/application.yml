@@ -9,10 +9,21 @@ spring:
         server-addr: localhost:8848
     gateway:
       routes: # 网关路由配置
-        - id: customer-user-service
+        - id: travel-data
           uri: lb://travel-data
           predicates:
             - Path=/dev-api/**
+
+        - id: travel-user
+          uri: lb://travel-user
+          predicates:
+            - Path=/dev-user/**
+
+        - id: travel-web
+          uri: lb://travel-web
+          predicates:
+            - Path=/dev-html/**
+
       default-filters:
           - StripPrefix=1
       globalcors:

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "travel-data", contextId="spotDataClient")
 public interface SpotDataClient {
-    @GetMapping("/spots")
+    @GetMapping("/getSpots")
     PageInfo<Notice> getSpots(@RequestParam("currentPage") int currentPage,
                               @RequestParam("pageSize") int pageSize);
 }

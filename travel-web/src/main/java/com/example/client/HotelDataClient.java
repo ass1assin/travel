@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "travel-data", contextId="hotelDataClient")
 public interface HotelDataClient {
-    @GetMapping("/hotel")
+    @GetMapping("/getHotel")
     PageInfo<Hotel> getHotel(@RequestParam("currentPage") int currentPage,
                              @RequestParam("pageSize") int pageSize);
 }

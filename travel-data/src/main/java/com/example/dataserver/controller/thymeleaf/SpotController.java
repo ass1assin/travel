@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-
 public class SpotController {
 
     @Autowired
     private SpotService spotService;
-      @GetMapping("/spots")
+      @GetMapping("/getSpots")
       public PageInfo<Notice> getSpots(@RequestParam(defaultValue = "1") int currentPage,
                                               @RequestParam(defaultValue = "10") int pageSize) {
           PageHelper.startPage(currentPage, pageSize);

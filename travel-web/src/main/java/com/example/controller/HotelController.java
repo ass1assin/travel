@@ -13,8 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 public class HotelController {
     @Autowired
     private HotelDataClient hotelDataClient;
-
-
     @GetMapping("/hotel")
     public ModelAndView getSpot(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
                                 @RequestParam(defaultValue = "10") int pageSize    // 默认为每页10条
@@ -24,16 +22,4 @@ public class HotelController {
         modelAndView.addObject("pageInfo", pageInfo);
         return modelAndView;
     }
-
-//    @Autowired
-//    private TrafficDataClient trafficDataClient;
-//
-//    @GetMapping("/trafficSpots")
-//    public ModelAndView getTrafficSpot(@RequestParam(defaultValue = "1") int currentPage,
-//                                       @RequestParam(defaultValue = "10") int pageSize) {
-//        ModelAndView modelAndView = new ModelAndView("html/traffic");
-//        PageInfo<Notice> pageInfo = trafficDataClient.getTrafficSpots(currentPage, pageSize);
-//        modelAndView.addObject("pageInfo", pageInfo);
-//        return modelAndView;
-//    }
 }

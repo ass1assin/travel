@@ -14,11 +14,10 @@ import java.util.List;
 
 @RestController
 public class HotelController {
-
     @Autowired
     private HotelService hotelService;
 
-    @GetMapping("/hotel")
+    @GetMapping("/getHotel")
     public PageInfo<Hotel> getTrafficSpots(@RequestParam(defaultValue = "1") int currentPage,
                                             @RequestParam(defaultValue = "10") int pageSize) {
         PageHelper.startPage(currentPage, pageSize);

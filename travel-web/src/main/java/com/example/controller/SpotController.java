@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-
 public class SpotController {
 
     @Autowired
     private SpotDataClient spotDataClient;
-
 
     @GetMapping("/spots")
     public ModelAndView getSpot(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
