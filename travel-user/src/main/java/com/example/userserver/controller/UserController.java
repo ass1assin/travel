@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/login")
+    @PostMapping("/getLogin")
     public User login(@RequestParam String username, @RequestParam String password) {
         return userService.findInfo(username, password);
     }

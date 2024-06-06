@@ -8,4 +8,8 @@ import java.util.List;
 @Mapper
 public interface HotelManageMapper {
     public List<Hotel> getAllHotel();
+
+    public boolean addHotel(Hotel hotel);
+
+    public boolean updateHotel(Hotel hotel);
 }

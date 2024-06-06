@@ -9,7 +9,23 @@
         <result property="hotelContent"       column="hotel_content"      />
         <result property="imageUrl"       column="image_url"      />
     </resultMap>
+    <resultMap type="com.example.model.Review" id="ReviewResult">
+        <id     property="id"         column="id"        />
+        <result property="content"       column="content"      />
+        <result property="reviewTime"       column="review_time"      />
+        <result property="reviewType"       column="review_type"      />
+        <result property="userName"       column="user_name"      />
+        <result property="userAvatar"       column="user_avatar"      />
+    </resultMap>
     <select id="getHotel" resultMap="HotelResult">
         select * from scenic_hotel
+    </select>
+
+    <select id="getHotelById" resultMap="HotelResult" parameterType="int">
+        select * from scenic_hotel where id=#{id}
+    </select>
+
+    <select id="getReviewById" resultMap="ReviewResult" parameterType="int">
+        select * from scenic_review where relation_id=#{id} and review_type=1
     </select>
 </mapper>

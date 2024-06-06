@@ -17,37 +17,37 @@
       <el-col :span="1" style="margin-right: 10px">
         <el-button type="success" plain @click="add()" size="mini" style="margin: 0px 0px 10px 10px">新增</el-button>
       </el-col>
-<!--      <el-col :span="3">-->
-<!--        <div>-->
-<!--          <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">-->
-<!--          <el-button type="warning" plain size="mini"-->
-<!--                     class="button border-main icon-cloud-upload dialogs"-->
-<!--                     data-toggle="click"-->
-<!--                     data-target="#excelDialog"-->
-<!--                     data-mask="1"-->
-<!--                     @click="dialogVisible=true"-->
-<!--                     data-width="50%">-->
-<!--            批量导入</el-button>-->
-<!--        </div>-->
-<!--      </el-col>-->
     </el-row>
     <!--    新增弹窗-->
     <el-dialog  :visible.sync="dialogadd">
       <el-form ref="form" :model="formData" label-width="80px">
-        <el-form-item label="学号">
+        <el-form-item label="编号">
           <el-input v-model="formData.id"></el-input>
         </el-form-item>
         <el-form-item label="图片">
-          <el-input v-model="formData.imageUrl"></el-input>
+          <el-upload
+              ref="upload"
+              :file-list="fileList"
+              list-type="picture-card"
+              :on-preview="handlePictureCardPreview"
+              :on-remove="handleRemove"
+              :on-change="handleChange"
+              :auto-upload="false"
+          >
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible2">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
         </el-form-item>
         <el-form-item label="酒店名称" >
           <el-input v-model="formData.hotelName"></el-input>
         </el-form-item>
         <el-form-item label="介绍" >
-          <el-input v-model="formData.hotelContent"></el-input>
+          <el-input v-model="formData.hotelContent" type="textarea" :autosize="{ minRows: 4, maxRows: 8}"></el-input>
         </el-form-item>
         <el-form-item  style="text-align: right;">
-          <el-button type="primary" @click="handadd">确定</el-button>
+          <el-button type="primary" @click="handleAdd">确定</el-button>
           <el-button @click="dialogadd = false">取消</el-button>
         </el-form-item>
       </el-form>
@@ -90,7 +90,10 @@
 
       <el-table-column label="图片" align="center" prop="imageUrl">
         <template slot-scope="scope">
-          {{ scope.row.imageUrl || '暂无数据' }}
+            <div class="block">
+              <el-image :src="scope.row.imageUrl"></el-image>
+            </div>
+<!--          {{ scope.row.imageUrl || '暂无数据' }}-->
         </template>
       </el-table-column>
 
@@ -127,7 +130,8 @@
 
 <script>
 import Pagination from "@/components/pagination/pagination.vue";
-import { getAllHotel } from '@/api/hotelmanage';
+import { addHotel, getAllHotel, uploadImage } from '@/api/hotelmanage';
+import axios from 'axios';
 export default {
   components: {
     Pagination,
@@ -147,9 +151,13 @@ export default {
       currentPage: 1,
       dialogadd:false,
       dialogVisible:false,
+      dialogVisible2: false,
       totalPages: 0,
       loading: false,
       dialogFormVisible: false,
+      dialogImageUrl: '',
+      dialogFormVisible2: false,
+      fileList: [] // 存储上传的文件列表
     }
   },
   created() {
@@ -162,9 +170,12 @@ export default {
     getList() {
       this.loading = true
       getAllHotel(this.queryParams).then((res) => {
-        console.log("%o",res);
-
-        this.dataList = res.data.list;
+        this.dataList = res.data.list.map(item => {
+          return {
+            ...item,
+            imageUrl: `http://localhost:8093/${item.imageUrl}`
+          };
+        });
         this.total = res.data.total
       });
     },
@@ -197,29 +208,73 @@ export default {
     add(){
       this.dialogadd=true
     },
-    handadd(){
-      this.dialogadd = false;
-      this.formData.classId=this.queryParams.classId
-      // addStu(this.formData).then((res)=>{
-      //   if (res.data.code === 200) {
-      //     this.dialogFormVisible = false;
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "success",
-      //       duration: 2000, // 提示消息显示时间，单位毫秒
-      //     });
-      //     // 操作成功，执行其他逻辑
-      //     this.getList();
-      //   } else {
-      //     // 操作失败，提示用户错误信息
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "error",
-      //       duration: 2000,
-      //     });
-      //   }
-      // });
+    handleChange(file, fileList) {
+      console.log("sssssssssss");
+      this.fileList = fileList;
     },
+    handleAdd() {
+      console.log(this.fileList);
+      if (this.fileList.length === 0) {
+        this.$message.error('请选择图片');
+        return;
+      }
+      const formData = new FormData();
+      formData.append('file', this.fileList[0].raw);
+
+      axios.post('http://localhost:8093/upload', formData)
+          .then(response => {
+            if (response.data === '图片上传成功') {
+              this.formData.imageUrl = 'img/' + this.fileList[0].raw.name; // 设置图片路径
+              this.saveData();
+            } else {
+              this.$message.error('图片上传失败');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            this.$message.error('图片上传失败');
+          });
+    },
+    saveData() {
+      // 在这里发送保存数据的请求
+      addHotel(this.formData).then(res => {
+        if (res.data.code === 200) {
+          this.$message.success('保存成功');
+          this.dialogadd = false;
+          this.getList(); // 刷新列表或其他操作
+        } else {
+          console.log("这里失败1");
+          this.$message.error('保存失败');
+        }
+      }).catch(error => {
+        console.error(error);
+        console.log("这里失败2");
+        this.$message.error('保存失败');
+      });
+    },
+
+    // handAdd(){
+    //   this.dialogadd = false;
+    //   addHotel(this.formData).then((res)=>{
+    //     if (res.data.code === 200) {
+    //       // this.dialogFormVisible = false;
+    //       this.$message({
+    //         message: res.data.msg,
+    //         type: "success",
+    //         duration: 2000, // 提示消息显示时间，单位毫秒
+    //       });
+    //       // 操作成功，执行其他逻辑
+    //       this.getList();
+    //     } else {
+    //       // 操作失败，提示用户错误信息
+    //       this.$message({
+    //         message: res.data.msg,
+    //         type: "error",
+    //         duration: 2000,
+    //       });
+    //     }
+    //   });
+    // },
     edit(row){
       this.formData = {
         // proomId: row.id,
@@ -268,6 +323,13 @@ export default {
           message: '已取消删除'
         });
       });
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible2 = true;
     },
   }
 }

@@ -12,4 +12,16 @@
     <select id="getAllHotel" resultMap="HotelResult">
         select * from scenic_hotel
     </select>
+    <insert id="addHotel" parameterType="com.example.model.Hotel">
+         insert into scenic_hotel (id,hotel_name,hotel_content,image_url)
+         values (#{id}, #{hotelName},#{hotelContent},#{imageUrl});
+    </insert>
+
+    <update id="updateHotel" parameterType="com.example.model.Hotel">
+         update scenic_hotel
+         set hotel_name=#{hotelName},
+             hotel_content=#{hotelContent},
+             image_url=#{imageUrl});
+         where id=#{id}
+    </update>
 </mapper>

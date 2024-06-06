@@ -55,10 +55,10 @@
               <!-- Link--><a class="nav-link active" href="index.html">景点</a>
             </li>
             <li class="nav-item px-1">
-              <!-- Link--><a class="nav-link" href="listing.html">酒店</a>
+              <!-- Link--><a class="nav-link" href="hotel.html">酒店</a>
             </li>
             <li class="nav-item px-1">
-              <!-- Link--><a class="nav-link" href="listing.html">交通</a>
+              <!-- Link--><a class="nav-link" href="hotel.html">交通</a>
             </li>
           </ul>
         </div>
@@ -67,61 +67,40 @@
   </header>
     <section class="py-5">
       <div class="container" style="text-align: center">
-        <h1>景点推荐</h1>
+        <h1>梧州</h1>
       </div>
       <div class="container text-center">
         <p class="mb-3">梧州市，古称“苍梧”“广信”， 广西壮族自治区 辖地级市，位于广西壮族自治区东部，扼浔江、桂江、西江总汇，为 珠江—西江经济带 重要节点城市</p>
-      </div><img class="w-100 py-5" src="img/post-banner.jpg" alt="">
+      </div>
+      <img class="w-100 py-5" src="img/post-banner.jpg" alt="">
       <div class="container">
         <div class="row gy-5">
           <div class="col-lg-8">
-            <p class="lead first-letter-styled lh-4">L orem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus.</p>
-            <div class="px-lg-5 mb-5">
-              <blockquote class="blockquote-custom">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</blockquote>
-            </div>
-            <h2>Heading level two</h2>
-            <p class="text-muted mb-4">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p><img class="img-fluid mb-4" src="img/post-img-1.jpg" alt="">
-            <p class="text-muted mb-5">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p>
-            <h3 class="mb-4">Heading level three</h3>
-            <ul class="list-check text-muted text-sm mb-5">
-              <li class="mb-1">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-              <li class="mb-1">Inventore magni sed error dignissimos repudiandae.</li>
-              <li class="mb-1">Aperiam cum, nisi sed aliquam soluta amet molestiae.</li>
-              <li class="mb-1">Consequatur sequi dolore, doloribus officia Nihil fugit.</li>
-            </ul>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p class="mb-5">Possimus animi modi praesentium quis delectus libero architecto ipsum sint iure amet rerum incidunt, harum facere voluptatibus eligendi. Velit sapiente omnis earum, facilis harum est debitis tenetur deserunt tempora explicabo!</p>
-            <h3 class="h4 mb-4 d-flex align-items-center"><span>Comments</span></h3>
+
+            <h2 th:text="${hotelInfo.hotelName}"></h2>
+            <p class="text-muted mb-4" th:text="${hotelInfo.hotelContent}"></p>
+            <img class="img-fluid mb-4" style="width: 100%" th:src="@{${hotelInfo.imageUrl}}" alt="Hotel Image">
+            <p class="text-muted mb-5" th:text="${hotelInfo.hotelContent}"></p>
+            <h3 class="mb-4">如何达到优质的文章</h3>
+
+            <p>在不断吸取蜂首文章和优质文章中的精华后，我发现完成一篇优秀的文章，需要完整的写作框架。文章中，不仅需要行程安排的合理，行程路线也要完整，还要有详尽的衣、食、住、行的全方位的介绍。</p>
+            <p class="mb-5">融合进自己对事物的认知和感悟，将文字和图片、视频完美的结合在一起，才能够得到一篇赏心悦目的文章。我还要不断的提炼，提升个人写作能力，让更多的读者喜欢上自己的作品，获得视觉上的享受。</p>
+            <h3 class="h4 mb-4 d-flex align-items-center"><span>评论</span></h3>
+
             <ul class="list-unstyled comments">
-              <li>
+              <li th:each="review : ${reviewInfo}">
                 <div class="d-flex mb-4">
-                  <div class="pe-2 flex-grow-1" style="width: 75px; min-width: 75px;"><img class="rounded-circle shadow-sm img-fluid img-thumbnail" src="img/person-1.jpg" alt=""/></div>
-                  <div class="ps-2">
-                    <p class="small mb-0 text-primary">15 Aug 2019</p>
-                    <h5>Jimmy Roy</h5>
-                    <p class="text-muted text-sm mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-sm" href="#!"><i class="fas fa-share me-2 text-primary"></i><strong>Reply</strong></a>
+                  <div class="pe-2 flex-grow-1" style="width: 75px; min-width: 75px;max-width: 75px">
+                    <img class="rounded-circle shadow-sm img-fluid img-thumbnail" th:src="@{${review.userAvatar}}" alt=""/>
                   </div>
-                </div>
-                <ul class="list-unstyled">
-                  <li>
-                    <div class="d-flex mb-4">
-                      <div class="pe-2 flex-grow-1" style="width: 75px; min-width: 75px;"><img class="rounded-circle shadow-sm img-fluid img-thumbnail" src="img/person-2.jpg" alt=""/></div>
-                      <div class="ps-2">
-                        <p class="small mb-0 text-primary">19 Sep 2019</p>
-                        <h5>Melissa Johanson</h5>
-                        <p class="text-muted text-sm mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-sm" href="#!"><i class="fas fa-share me-2 text-primary"></i><strong>Reply</strong></a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <div class="d-flex mb-4">
-                  <div class="pe-2 flex-grow-1" style="width: 75px; min-width: 75px;"><img class="rounded-circle shadow-sm img-fluid img-thumbnail" src="img/person-3.jpg" alt=""/></div>
                   <div class="ps-2">
-                    <p class="small mb-0 text-primary">10 Oct 2019</p>
-                    <h5>David Nguyen</h5>
-                    <p class="text-muted text-sm mb-2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At.</p><a class="reset-anchor text-sm" href="#!"><i class="fas fa-share me-2 text-primary"></i><strong>Reply</strong></a>
+                    <p class="small mb-0 text-primary" th:text="${review.reviewTime}"></p>
+                    <h5 th:text="${review.userName}"></h5>
+                    <p class="text-muted text-sm mb-2" th:text="${review.content}"></p>
+                    <a class="reset-anchor text-sm" href="#!">
+                      <i class="fas fa-share me-2 text-primary"></i>
+                      <strong>转发</strong>
+                    </a>
                   </div>
                 </div>
               </li>
@@ -183,10 +162,6 @@
           document.body.insertBefore(div, document.body.childNodes[0]);
           }
       }
-      // this is set to BootstrapTemple website as you cannot
-      // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
-      // while using file:// protocol
-      // pls don't forget to change to your domain :)
       injectSvgSprite('icons/orion-svg-sprite.svg');
 
     </script>

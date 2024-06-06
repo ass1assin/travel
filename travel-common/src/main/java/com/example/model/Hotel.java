@@ -57,4 +57,16 @@ public class Hotel {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", hotelName='" + hotelName + '\'' +
+                ", hotelContent='" + hotelContent + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", currentPage=" + currentPage +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }

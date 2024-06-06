@@ -45,65 +45,27 @@
       <div class="container pt-5">
         <div class="row mb-5">
           <div class="col-lg-8">
-
-<!--            <div class="row text-center" th:each="article : ${pageInfo.list}">-->
-<!--              &lt;!&ndash; 假设每行只显示一个文章，则不需要额外的col-lg-6包装 &ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="col-lg-6 mb-5" th:if="${pageInfo.listStat.size} % 2 != 0 || ${#lists.currentIndex} % 2 == 0">&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="col-lg-6 mb-5" th:class="${#lists.size(pageInfo.list) > 1} ? 'col-lg-4' : 'col-lg-6'">&ndash;&gt;-->
-<!--              <div class="col-lg-6 mb-5">-->
-<!--                <a href="post.html" target="_blank">-->
-<!--                  <img class="img-fluid mb-4" th:src="${article.imageUrl}" alt="" />-->
-<!--                </a>-->
-<!--                <h3 class="h4 mt-2">-->
-<!--                  <a class="reset-anchor" href="post.html" th:text="${article.hotelName}"></a>-->
-<!--                </h3>-->
-<!--                <p class="text-small mb-1" th:text="${article.hotelContent}"></p>-->
-<!--              </div>-->
-<!--            </div>-->
-
-<!--            <div class="row text-center" th:each="article : ${pageInfo.list}">-->
-<!--              <div class="col-lg-6 mb-5">-->
-<!--                <a href="post.html" target="_blank">-->
-<!--                  <img class="img-fluid mb-4" th:src="${article.imageUrl}" alt="Article Image" />-->
-<!--                </a>-->
-<!--                <h3 class="h4 mt-2">-->
-<!--                  <a class="reset-anchor" href="post.html" th:text="${article.hotelName}"></a>-->
-<!--                </h3>-->
-<!--                <p class="text-small mb-1" th:text="${article.hotelContent}"></p>-->
-<!--              </div>-->
-<!--              <div class="col-lg-6 mb-5">-->
-<!--                <a href="post.html" target="_blank">-->
-<!--                  <img class="img-fluid mb-4" th:src="${article.imageUrl}" alt="Article Image" />-->
-<!--                </a>-->
-<!--                <h3 class="h4 mt-2">-->
-<!--                  <a class="reset-anchor" href="post.html" th:text="${article.hotelName}"></a>-->
-<!--                </h3>-->
-<!--                <p class="text-small mb-1" th:text="${article.hotelContent}"></p>-->
-<!--              </div>-->
-<!--              &lt;!&ndash; 注意：这里通常不需要第二个.col-lg-6，除非您想在同一行显示另一个元素 &ndash;&gt;-->
-<!--            </div>-->
-            <div th:each="article, iterStat : ${pageInfo.list}" class="row text-center" th:if="${!iterStat.last || iterStat.index % 2 == 0}">
-              <!-- 左边：索引为偶数或列表的最后一个元素 -->
-              <div class="col-lg-6 mb-5" th:classappend="${iterStat.index+1 % 2 != 0} ? 'order-lg-2' : ''">
-                <a th:href="@{/posts/{id}(id=${article.id})}" target="_blank">
-                  <img class="img-fluid mb-4" th:src="${article.imageUrl}" alt="Article Image" />
+            <div class="row text-center">
+              <!-- 左边：ID为奇数的酒店 -->
+              <div th:each="hotel : ${oddHotels}" class="col-lg-6 mb-5">
+                <a th:href="@{/hotelDetail(id=${hotel.id})}" target="_blank">
+                  <img class="img-fluid mb-4" th:src="${hotel.imageUrl}" alt="Hotel Image" />
                 </a>
                 <h3 class="h4 mt-2">
-                  <a class="reset-anchor" th:href="@{/posts/{id}(id=${article.id})}" th:text="${article.hotelName}"></a>
+                  <a class="reset-anchor" th:href="@{/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelName}"></a>
                 </h3>
-                <p class="text-small mb-1" th:text="${article.hotelContent}"></p>
+                <p class="text-small mb-1" th:text="${hotel.hotelContent}"></p>
               </div>
 
-              <!-- 右边：仅当索引为奇数时显示 -->
-              <div class="col-lg-6 mb-5" th:if="${!iterStat.last && iterStat.index+1 % 2 != 0}">
-                <!-- 假设下一个元素存在，因为我们已经通过th:if排除了列表的最后一个元素 -->
-                <a th:href="@{/posts/{id}(id=${pageInfo.list[iterStat.index + 1].id})}" target="_blank">
-                  <img class="img-fluid mb-4" th:src="${pageInfo.list[iterStat.index + 1].imageUrl}" alt="Article Image" />
+              <!-- 右边：ID为偶数的酒店 -->
+              <div th:each="hotel : ${evenHotels}" class="col-lg-6 mb-5">
+                <a th:href="@{/hotelDetail(id=${hotel.id})}" target="_blank">
+                  <img class="img-fluid mb-4" th:src="${hotel.imageUrl}" alt="Hotel Image" />
                 </a>
                 <h3 class="h4 mt-2">
-                  <a class="reset-anchor" th:href="@{/posts/{id}(id=${pageInfo.list[iterStat.index + 1].id})}" th:text="${pageInfo.list[iterStat.index + 1].hotelName}"></a>
+                  <a class="reset-anchor" th:href="@{/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelName}"></a>
                 </h3>
-                <p class="text-small mb-1" th:text="${pageInfo.list[iterStat.index + 1].hotelContent}"></p>
+                <p class="text-small mb-1" th:text="${hotel.hotelContent}"></p>
               </div>
             </div>
             <!-- Listing navigation -->

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "travel-user", contextId="userDataClient")
 public interface UserDataClient {
-    @PostMapping("/login")
+    @PostMapping("/getLogin")
     User login(@RequestParam("username") String username, @RequestParam("password") String password);
 
     @PostMapping("/register")

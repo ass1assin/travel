@@ -20,4 +20,13 @@ public class HotelManageServiceImpl implements HotelManageService {
     public List<Hotel> getAllHotel(){
         return hotelManageMapper.getAllHotel();
     }
+
+    public boolean addHotel(Hotel hotel){
+        return hotelManageMapper.addHotel(hotel);
+    }
+
+    @Override
+    public boolean updateHotel(Hotel hotel) {
+        return hotelManageMapper.updateHotel(hotel);
+    }
 }
