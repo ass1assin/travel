@@ -16,4 +16,7 @@ public interface UserDataClient {
     @PostMapping("/register")
     String register(@RequestParam("username") String username, @RequestParam("password") String password);
 
+    @GetMapping("/getPersonInfo")
+    User getPersonInfo(@RequestParam("username") String username, @RequestParam("password") String password);
+
 }

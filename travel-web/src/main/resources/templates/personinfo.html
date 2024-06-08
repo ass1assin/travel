@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="vendor/swiper/swiper-bundle.min.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="vendor/owl.carousel2/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendor/owl.carousel2/assets/owl.theme.default.min.css">
+    <!-- Google fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,400&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #F5F5F5;
+            margin: 0;
+            padding: 0;
+        }
+        .PersonTop {
+            display: flex;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .PersonTop_img {
+            width: 150px;
+            height: 150px;
+            background-color: #8c939d;
+            margin-right: 24px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .PersonTop_img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+        }
+        .PersonTop_text {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+        }
+        .user_text {
+            line-height: 30px;
+        }
+        .user_name {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .user_qianming {
+            font-size: 14px;
+            color: #999;
+        }
+        .user_anniu {
+            margin-top: 10px;
+        }
+        .user_anniu button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: white;
+        }
+        .user_num {
+            display: flex;
+            align-items: center;
+        }
+        .user_num > div {
+            text-align: center;
+            padding: 10px;
+            border-right: 1px dotted #999;
+        }
+        .user_num > div:last-child {
+            border-right: none;
+        }
+        .num_text {
+            color: #999;
+        }
+        .num_number {
+            font-size: 20px;
+            color: #333;
+        }
+        .person_body {
+            display: flex;
+            margin-top: 20px;
+        }
+        .person_body_left {
+            flex: 1;
+            margin-right: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .box-card {
+            padding: 20px;
+        }
+        .person_body_list {
+            font-size: 22px;
+            padding: 20px 0;
+            color: #2c3034;
+
+            margin-bottom: 10px;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #F5F5F5;
+        }
+        .sidebar ul li a {
+            text-align: center;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+        }
+        .sidebar ul li a:hover {
+            background-color: #e0e0e0;
+        }
+        .person_body_right {
+            flex: 3;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div>
+<th:block th:replace="header :: header" />
+</div>
+<div class="container" style="background-color: white;border-radius: 5px;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);margin-top: 50px">
+    <div class="PersonTop">
+        <div class="PersonTop_img">
+            <img src="img/person-1.jpg" alt="Avatar">
+        </div>
+        <div class="PersonTop_text">
+            <div class="user_text">
+                <div class="user_name">名字</div>
+                <div class="user_qianming"  th:text="${username}">用户名</div>
+                <div class="user_qianming"  th:text="${password}">密码</div>
+                <div class="user_anniu">
+                    <button class="el-icon-edit" type="button">编辑</button>
+                </div>
+            </div>
+            <div class="user_num">
+                <div>
+                    <div class="num_number">0</div>
+                    <span class="num_text">粉丝</span>
+                </div>
+                <div>
+                    <div class="num_number">0</div>
+                    <span class="num_text">关注</span>
+                </div>
+                <div>
+                    <div class="num_number">0</div>
+                    <span class="num_text">获赞</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="person_body">
+        <div class="person_body_left">
+            <div class="box-card">
+                <div style="border-bottom: 1px solid #8C939D;padding-bottom: 10px">
+                    <span class="person_body_list">个人中心</span>
+                </div>
+                <div class="sidebar">
+                    <ul>
+                        <li class="menu-item"><a href="#">个人简介</a></li>
+                        <li class="menu-item"><a href="#">发帖</a></li>
+                        <li class="menu-item"><a href="#">收藏</a></li>
+                        <li class="menu-item"><a href="#">粉丝</a></li>
+                        <li class="menu-item"><a href="#">关注</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="person_body_right">
+            <div style="border-bottom: 1px solid #8C939D;padding-bottom: 10px">
+                <span class="person_body_list">简介</span>
+                <span class="user_anniu">
+                    <button class="el-icon-edit" type="button">编辑</button>
+                </span>
+            </div>
+            <table>
+                <tr>
+                    <th>姓名</th>
+                    <td>张三</td>
+                </tr>
+                <tr>
+                    <th>手机号</th>
+                    <td>1234567890</td>
+                </tr>
+                <tr>
+                    <th>性别</th>
+                    <td>男</td>
+                </tr>
+                <tr>
+                    <th>地区</th>
+                    <td>北京</td>
+                </tr>
+                <tr>
+                    <th>注册时间</th>
+                    <td>2023-01-01</td>
+                </tr>
+                <tr>
+                    <th>电子邮件</th>
+                    <td>zhangsan@example.com</td>
+                </tr>
+                <tr>
+                    <th>生日</th>
+                    <td>1990-01-01</td>
+                </tr>
+                <tr>
+                    <th>职业</th>
+                    <td>软件工程师</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/swiper/swiper-bundle.min.js"></script>
+<script src="js/front.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</body>
+
+</html>

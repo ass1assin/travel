@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface HotelManageMapper {
-    public List<Hotel> getAllHotel();
+    public List<Hotel> getAllHotel(Hotel hotel);
 
     public boolean addHotel(Hotel hotel);
 

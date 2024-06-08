@@ -27,7 +27,7 @@ public class HotelManageController extends BaseController {
     @GetMapping("/getAllHotel")
     public AjaxResult getAllHotel(Hotel hotel){
         PageHelper.startPage(hotel.getCurrentPage(), hotel.getPageSize());
-        List<Hotel> list = hotelManageService.getAllHotel();
+        List<Hotel> list = hotelManageService.getAllHotel(hotel);
         PageInfo<Hotel> pageInfo = new PageInfo<>(list);
         return AjaxResult.success(pageInfo);
     }

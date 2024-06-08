@@ -17,8 +17,8 @@ public class HotelManageServiceImpl implements HotelManageService {
     @Autowired
     HotelManageMapper hotelManageMapper;
 
-    public List<Hotel> getAllHotel(){
-        return hotelManageMapper.getAllHotel();
+    public List<Hotel> getAllHotel(Hotel hotel){
+        return hotelManageMapper.getAllHotel(hotel);
     }
 
     public boolean addHotel(Hotel hotel){

@@ -6,8 +6,30 @@
     <resultMap type="com.example.model.ScenicSpot" id="SysMenuResult">
         <id     property="id"         column="id"        />
         <result property="spotName"       column="spot_name"      />
+        <result property="spotContent"       column="spot_content"      />
+        <result property="spotLocation"       column="spot_location"      />
+        <result property="imageUrl"       column="image_url"      />
     </resultMap>
     <select id="getAllSpot" resultMap="SysMenuResult">
         select * from scenic_spot
+        <where>
+            <if test="spotName != null and spotName !=''">
+                AND scenic_spot.spot_name LIKE CONCAT('%',#{spotName},'%')
+            </if>
+        </where>
     </select>
+
+    <insert id="addSpot" parameterType="com.example.model.ScenicSpot">
+        insert into scenic_spot (spot_name,spot_content,image_url,spot_location)
+        values (#{spotName},#{spotContent},#{imageUrl},#{spotLocation});
+    </insert>
+
+    <update id="updateSpot" parameterType="com.example.model.ScenicSpot">
+        update scenic_spot
+        set spot_name=#{spotName},
+            spot_content=#{spotContent},
+            image_url=#{imageUrl},
+            spot_location,=#{spot_location}
+        where id=#{id}
+    </update>
 </mapper>

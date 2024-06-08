@@ -8,12 +8,18 @@
         <result property="userName"       column="user_name"      />
         <result property="passWord"       column="user_password"      />
     </resultMap>
-    <select id="findInfo" resultMap="UserResult" parameterType="map">
-        SELECT * FROM sys_user WHERE user_name = #{param1} AND user_password = #{param2}
+    <select id="findInfo" resultMap="UserResult">
+        SELECT * FROM sys_user
+        WHERE
+        user_name = #{username} AND user_password = #{password}
     </select>
 
-    <select id="register" resultMap="UserResult">
+    <insert id="register">
       INSERT INTO sys_user (user_name,user_password)
       VALUES (#{username},#{password})
+    </insert>
+
+    <select id="getPersonInfo" resultMap="UserResult">
+        SELECT * FROM sys_user
     </select>
 </mapper>

@@ -23,13 +23,17 @@ public class UserServiceImpl implements UserService {
         }
     }
     @Override
-    public User register(String username, String password) {
+    public boolean register(String username, String password) {
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)){
-            return null;
+            return true;
         }else {
-            User user = userMapper.register(username, password);
+            boolean user = userMapper.register(username, password);
             return user;
         }
     }
 
+    @Override
+    public User getPersonInfo() {
+        return userMapper.getPersonInfo();
+    }
 }

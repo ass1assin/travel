@@ -6,7 +6,7 @@ import com.example.model.ScenicSpot;
 import java.util.List;
 
 public interface HotelManageService {
-    public List<Hotel> getAllHotel();
+    public List<Hotel> getAllHotel(Hotel hotel);
 
     public boolean addHotel(Hotel hotel);
 

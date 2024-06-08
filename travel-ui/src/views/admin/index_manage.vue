@@ -2,8 +2,8 @@
   <div style="margin: 20px">
     <el-form :model="queryParams" ref="queryForm" label-width="100px" size="small" :inline="true" v-show="showSearch"
              class="top-query">
-      <el-form-item label="学生证编号" prop="name">
-        <el-input v-model="queryParams.stucardId" placeholder="请输入琴房地址" clearable @keyup.enter.native="query">
+      <el-form-item label="景点名称" prop="name">
+        <el-input v-model="queryParams.spotName" placeholder="请输入景点名称" clearable @keyup.enter.native="query">
         </el-input>
       </el-form-item>
 
@@ -17,71 +17,75 @@
       <el-col :span="1" style="margin-right: 10px">
         <el-button type="success" plain @click="add()" size="mini" style="margin: 0px 0px 10px 10px">新增</el-button>
       </el-col>
-      <!--      <el-col :span="3">-->
-      <!--        <div>-->
-      <!--          <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">-->
-      <!--          <el-button type="warning" plain size="mini"-->
-      <!--                     class="button border-main icon-cloud-upload dialogs"-->
-      <!--                     data-toggle="click"-->
-      <!--                     data-target="#excelDialog"-->
-      <!--                     data-mask="1"-->
-      <!--                     @click="dialogVisible=true"-->
-      <!--                     data-width="50%">-->
-      <!--            批量导入</el-button>-->
-      <!--        </div>-->
-      <!--      </el-col>-->
     </el-row>
     <!--    新增弹窗-->
-    <el-dialog  :visible.sync="dialogadd">
+    <el-dialog  :visible.sync="dialogAdd">
       <el-form ref="form" :model="formData" label-width="80px">
-        <el-form-item label="学号">
-          <el-input v-model="formData.id"></el-input>
+        <el-form-item label="图片">
+          <el-upload
+              ref="upload"
+              :file-list="fileList"
+              list-type="picture-card"
+              :on-preview="handlePictureCardPreview"
+              :on-remove="handleRemove"
+              :on-change="handleChange"
+              :auto-upload="false"
+          >
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible2">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
         </el-form-item>
-        <!--        <el-form-item label="姓名">-->
-        <!--          <el-input v-model="formData.stuName"></el-input>-->
-        <!--        </el-form-item>-->
-        <!--        &lt;!&ndash;        <el-form-item label="性别" >&ndash;&gt;-->
-        <!--        &lt;!&ndash;          <el-input v-model="formData.sex"></el-input>&ndash;&gt;-->
-        <!--        &lt;!&ndash;        </el-form-item>&ndash;&gt;-->
-        <!--        <el-form-item label="性别">-->
-        <!--          <el-radio-group v-model="formData.sex">-->
-        <!--            <el-radio label="男"></el-radio>-->
-        <!--            <el-radio label="女"></el-radio>-->
-        <!--          </el-radio-group>-->
-        <!--        </el-form-item>-->
-        <!--        <el-form-item label="密码" >-->
-        <!--          <el-input v-model="formData.password"></el-input>-->
-        <!--        </el-form-item>-->
+        <el-form-item label="景点名称" >
+          <el-input v-model="formData.spotName"></el-input>
+        </el-form-item>
+        <el-form-item label="地点" >
+          <el-input v-model="formData.spotLocation"></el-input>
+        </el-form-item>
+        <el-form-item label="介绍" >
+          <el-input v-model="formData.spotContent" type="textarea" :autosize="{ minRows: 4, maxRows: 8}"></el-input>
+        </el-form-item>
         <el-form-item  style="text-align: right;">
-          <el-button type="primary" @click="handadd">确定</el-button>
-          <el-button @click="dialogadd = false">取消</el-button>
+          <el-button type="primary" @click="handleAdd">确定</el-button>
+          <el-button @click="dialogAdd = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
-    <!--删除弹窗-->
 
 
-    <el-dialog  :visible.sync="dialogFormVisible">
+    <!--修改弹窗-->
+    <el-dialog :visible.sync="dialogUpdate">
       <el-form ref="form" :model="formData" label-width="80px">
-        <el-form-item label="琴房编号">
-          <el-input v-model="formData.proomId" readonly></el-input>
+        <el-form-item label="图片">
+          <el-upload
+              ref="upload"
+              :file-list="fileList"
+              list-type="picture-card"
+              :on-preview="handlePictureCardPreview"
+              :on-remove="handleRemove"
+              :on-change="handleChange"
+              :auto-upload="false"
+          >
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible2">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
         </el-form-item>
-        <el-form-item label="琴房地址">
-          <el-input v-model="formData.address"></el-input>
+        <el-form-item label="景点名称">
+          <el-input v-model="formData.spotName"></el-input>
         </el-form-item>
-        <el-form-item label="琴房类型">
-          <el-input v-model="formData.type"></el-input>
+        <el-form-item label="地点" >
+          <el-input v-model="formData.spotLocation"></el-input>
         </el-form-item>
-        <!--        <el-select v-model="formData.openIda" placeholder="请选择上午时间"  @visible-change="handleAmTimeChange(1)">-->
-        <!--          <el-option v-for="time in allTimes" :key="time.openId" :label="formatTimeRange(time.openTime,time.closeTime)" :value="time.openId"></el-option>-->
-        <!--        </el-select>-->
-        <!--        <el-select v-model="formData.openIdp" placeholder="请选择下午时间"  @visible-change="handleAmTimeChange(2)">-->
-        <!--          <el-option v-for="time in allTimes" :key="time.openId" :label="formatTimeRange(time.openTime,time.closeTime)" :value="time.openId"></el-option>-->
-        <!--        </el-select>-->
+        <el-form-item label="介绍">
+          <el-input v-model="formData.spotContent" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }"></el-input>
+        </el-form-item>
 
-        <el-form-item  style="text-align: right;">
-          <el-button type="primary" @click="handedit">确定</el-button>
-          <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-form-item style="text-align: right;">
+          <el-button type="primary" @click="handeEdit">确定</el-button>
+          <el-button @click="dialogUpdate = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -98,42 +102,32 @@
         </template>
       </el-table-column>
 
-<!--      <el-table-column label="预约时间" align="center" prop="address">-->
-<!--        <template slot-scope="scope">-->
-<!--          {{ formatTime(scope.row.resTime) || '暂无数据' }}-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-
-<!--      <el-table-column label="开始时间" align="center" prop="type">-->
-<!--        <template slot-scope="scope">-->
-<!--          &lt;!&ndash;          {{ scope.row.startTime || '暂无数据' }}&ndash;&gt;-->
-<!--          {{ formatTime(scope.row.startTime) || '暂无数据' }}-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-
-<!--      <el-table-column label="结束时间" align="center" prop="openTime">-->
-<!--        <template slot-scope="scope">-->
-<!--          {{ formatTime(scope.row.endTime) || '暂无数据' }}-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-
       <el-table-column label="景点名称" align="center">
         <template slot-scope="scope">
           {{ scope.row.spotName || '暂无数据' }}
         </template>
       </el-table-column>
 
-<!--      <el-table-column label="琴房地址" align="center" prop="type">-->
-<!--        <template slot-scope="scope">-->
-<!--          {{ scope.row.address || '暂无数据' }}-->
-<!--        </template>-->
-<!--      </el-table-column>-->
-<!--      <el-table-column label="学生证编号" align="center" prop="type">-->
-<!--        <template slot-scope="scope">-->
-<!--          {{ scope.row.stucardId || '暂无数据' }}-->
+      <el-table-column label="图片" align="center" prop="imageUrl">
+        <template slot-scope="scope">
+          <div class="block">
+            <el-image :src="scope.row.imageUrl"></el-image>
+          </div>
+        </template>
+      </el-table-column>
 
-<!--        </template>-->
-<!--      </el-table-column>-->
+      <el-table-column label="地点" align="center" prop="spotLocation">
+        <template slot-scope="scope">
+          {{ scope.row.spotLocation || '暂无数据' }}
+        </template>
+      </el-table-column>
+
+      <el-table-column label="介绍" align="center" prop="spotContent">
+        <template slot-scope="scope">
+          <!--          {{ scope.row.startTime || '暂无数据' }}-->
+          {{ scope.row.spotContent || '暂无数据' }}
+        </template>
+      </el-table-column>
 
       <el-table-column label="操作" align="center" min-width="160">
         <template slot-scope="scope">
@@ -143,9 +137,7 @@
       </el-table-column>
 
     </el-table>
-    <!--    分页-->
-    <!--    <pagination :current-page.sync="currentPage" :total-pages.sync="totalPages"/>-->
-    <pagination
+     <pagination
         :pagesize="queryParams.pageSize"
         :current-page.sync="queryParams.currentPage"
         :total-pages.sync="total"
@@ -156,7 +148,10 @@
 
 <script>
 import Pagination from "@/components/pagination/pagination.vue";
-import { getAllSpot, test } from '@/api';
+
+
+import axios from 'axios';
+import { addSpot, getAllSpot, updateSpot } from '@/api/spotmanage';
 
 export default {
   components: {
@@ -176,10 +171,15 @@ export default {
       },
       dialogadd:false,
       dialogVisible:false,
+      dialogAdd:false,
+      dialogUpdate:false,
+      dialogVisible2: false,
+      dialogImageUrl: '',
       currentPage: 1,
       totalPages: 0,
       loading: false,
       dialogFormVisible: false,
+      fileList: [] // 存储上传的文件列表
     }
   },
   created() {
@@ -192,64 +192,103 @@ export default {
     getList() {
       this.loading = true
       getAllSpot(this.queryParams).then((res) => {
-        console.log("%o",res);
-        this.dataList = res.data.list;
+        this.dataList = res.data.list.map(item => {
+          return {
+            ...item,
+            imageUrl: `http://localhost:8093/${item.imageUrl}`
+          };
+        });
         this.total = res.data.total
       });
     },
     add(){
-      this.dialogadd=true
+      this.dialogAdd=true
     },
-    handadd(){
-      this.dialogadd = false;
-      this.formData.classId=this.queryParams.classId
-      // addStu(this.formData).then((res)=>{
-      //   if (res.data.code === 200) {
-      //     this.dialogFormVisible = false;
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "success",
-      //       duration: 2000, // 提示消息显示时间，单位毫秒
-      //     });
-      //     // 操作成功，执行其他逻辑
-      //     this.getList();
-      //   } else {
-      //     // 操作失败，提示用户错误信息
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "error",
-      //       duration: 2000,
-      //     });
-      //   }
-      // });
+    handleChange(file, fileList) {
+      this.fileList = fileList;
+    },
+    handleAdd() {
+      console.log(this.fileList);
+      if (this.fileList.length === 0) {
+        this.$message.error('请选择图片');
+        return;
+      }
+      const formData = new FormData();
+      formData.append('file', this.fileList[0].raw);
+
+      axios.post('http://localhost:8093/upload', formData)
+          .then(response => {
+            if (response.data === '图片上传成功') {
+              this.formData.imageUrl = 'img/' + this.fileList[0].raw.name; // 设置图片路径
+              this.saveData();
+            } else {
+              this.$message.error('图片上传失败');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            this.$message.error('图片上传失败');
+          });
+    },
+    saveData() {
+      // 在这里发送保存数据的请求
+      addSpot(this.formData).then(res => {
+        if (res.code === 200) {
+          this.$message.success('保存成功');
+          this.dialogAdd = false;
+          this.getList(); // 刷新列表或其他操作
+          this.$message.error('保存失败1');
+        }
+      }).catch(error => {
+        this.$message.error('保存失败2');
+      });
     },
     edit(row){
       this.formData = {
-        // proomId: row.id,
+        id: row.id,
+        spotName:row.spotName,
+        spotContent:row.spotContent,
       };
-      this.dialogFormVisible = true;
+      this.fileList = [{
+        name: row.imageUrl.split('/').pop(),  // 从 URL 中提取文件名
+        url: row.imageUrl  // 设置图片 URL
+      }];
+      // this.dialogImageUrl=row.imageUrl,
+      this.dialogUpdate = true;
     },
-    handedit(){
-      this.dialogFormVisible = false;
-      // updateProom(this.formData).then((res)=>{
-      //   if (res.data.code === 200) {
-      //     this.dialogFormVisible = false;
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "success",
-      //       duration: 2000, // 提示消息显示时间，单位毫秒
-      //     });
-      //     // 操作成功，执行其他逻辑
-      //     this.getList();
-      //   } else {
-      //     // 操作失败，提示用户错误信息
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "error",
-      //       duration: 2000,
-      //     });
-      //   }
-      // });
+    handeEdit() {
+      console.log(this.fileList);
+      if (this.fileList.length === 0) {
+        this.$message.error('请选择图片');
+        return;
+      }
+      const formData = new FormData();
+      formData.append('file', this.fileList[0].raw);
+      axios.post('http://localhost:8093/upload', formData)
+          .then(response => {
+            if (response.data === '图片上传成功') {
+              this.formData.imageUrl = 'img/' + this.fileList[0].raw.name; // 设置图片路径
+              this.saveEdit();
+            } else {
+              this.$message.error('图片上传失败');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            this.$message.error('图片上传失败');
+          });
+    },
+    saveEdit(){
+      this.dialogUpdate = false;
+      updateSpot(this.formData).then(res => {
+        if (res.code === 200) {
+          this.$message.success('修改成功');
+          this.dialogUpdate = false;
+          this.getList(); // 刷新列表或其他操作
+        }
+      }).catch(error => {
+        this.$message.error('修改失败2');
+      });
     },
     delete1(id) {
       this.$confirm('该操作将删除该信息, 是否继续?', '提示', {
@@ -257,14 +296,6 @@ export default {
         cancelButtonText: '取消',
         // type: 'warning'
       }).then(() => {
-        // deleteStu(stuId).then((res) =>{
-        //   this.getList();
-        //   this.$message({
-        //     type: 'success',
-        //     message: '删除成功!'
-        //   });
-        // }
-        // )
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -295,8 +326,15 @@ export default {
 
     // 重置
     resetQuery() {
-      this.queryParams.stucardId=null;
+      this.queryParams.spotName=null;
       this.getList();
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible2 = true;
     },
   }
 }

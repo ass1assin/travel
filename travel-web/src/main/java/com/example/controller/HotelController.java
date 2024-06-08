@@ -18,7 +18,7 @@ public class HotelController {
     @Autowired
     private HotelDataClient hotelDataClient;
     @GetMapping("/hotel")
-    public ModelAndView getSpot(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
+    public ModelAndView getHotel(@RequestParam(defaultValue = "1") int currentPage, // 默认为第一页
                                 @RequestParam(defaultValue = "10") int pageSize    // 默认为每页10条
     ) {
         ModelAndView modelAndView = new ModelAndView("hotel");

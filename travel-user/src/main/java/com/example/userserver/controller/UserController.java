@@ -4,6 +4,7 @@ import com.example.model.User;
 import com.example.userserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,13 @@ public class UserController {
         if (user != null) {
             return "already_registered";
         }
+        System.out.println("报错了吗");
         userService.register(username, password);
         return "registration_success";
+    }
+
+    @GetMapping("/getPersonInfo")
+    public User getPersonInfo() {
+        return userService.getPersonInfo();
     }
 }

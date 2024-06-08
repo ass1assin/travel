@@ -7,3 +7,19 @@ export function getAllNotice(data){
     params: data
   })
 }
+export function addNotice(data){
+  return request({
+    url:'/addNotice',
+    method: 'post',
+    data: data,
+  })
+}
+
+export function updateNotice(data){
+  return request({
+    url:'/updateNotice',
+    method: 'put',
+    data: data,
+  })
+}
+

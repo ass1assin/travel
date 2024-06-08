@@ -9,19 +9,24 @@
         <result property="hotelContent"       column="hotel_content"      />
         <result property="imageUrl"       column="image_url"      />
     </resultMap>
-    <select id="getAllHotel" resultMap="HotelResult">
+    <select id="getAllHotel" resultMap="HotelResult" parameterType="com.example.model.Hotel">
         select * from scenic_hotel
+        <where>
+            <if test="hotelName != null and hotelName !=''">
+                AND scenic_hotel.hotel_name LIKE CONCAT('%',#{hotelName},'%')
+            </if>
+        </where>
     </select>
     <insert id="addHotel" parameterType="com.example.model.Hotel">
-         insert into scenic_hotel (id,hotel_name,hotel_content,image_url)
-         values (#{id}, #{hotelName},#{hotelContent},#{imageUrl});
+         insert into scenic_hotel (hotel_name,hotel_content,image_url)
+         values (#{hotelName},#{hotelContent},#{imageUrl});
     </insert>
 
     <update id="updateHotel" parameterType="com.example.model.Hotel">
          update scenic_hotel
          set hotel_name=#{hotelName},
              hotel_content=#{hotelContent},
-             image_url=#{imageUrl});
+             image_url=#{imageUrl}
          where id=#{id}
     </update>
 </mapper>

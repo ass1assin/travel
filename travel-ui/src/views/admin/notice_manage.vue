@@ -3,7 +3,7 @@
     <el-form :model="queryParams" ref="queryForm" label-width="100px" size="small" :inline="true" v-show="showSearch"
              class="top-query">
       <el-form-item label="学生证编号" prop="name">
-        <el-input v-model="queryParams.stucardId" placeholder="请输入琴房地址" clearable @keyup.enter.native="query">
+        <el-input v-model="queryParams.noticeTitle" placeholder="请输入琴房地址" clearable @keyup.enter.native="query">
         </el-input>
       </el-form-item>
 
@@ -18,65 +18,68 @@
       <el-col :span="1" style="margin-right: 10px">
         <el-button type="success" plain @click="add()" size="mini" style="margin: 0px 0px 10px 10px">新增</el-button>
       </el-col>
-      <!--      <el-col :span="3">-->
-      <!--        <div>-->
-      <!--          <input type="file" ref="fileInput" style="display: none" @change="handleFileChange">-->
-      <!--          <el-button type="warning" plain size="mini"-->
-      <!--                     class="button border-main icon-cloud-upload dialogs"-->
-      <!--                     data-toggle="click"-->
-      <!--                     data-target="#excelDialog"-->
-      <!--                     data-mask="1"-->
-      <!--                     @click="dialogVisible=true"-->
-      <!--                     data-width="50%">-->
-      <!--            批量导入</el-button>-->
-      <!--        </div>-->
-      <!--      </el-col>-->
     </el-row>
     <!--    新增弹窗-->
-    <el-dialog  :visible.sync="dialogadd">
+    <el-dialog  :visible.sync="dialogAdd">
       <el-form ref="form" :model="formData" label-width="80px">
-        <el-form-item label="学号">
-          <el-input v-model="formData.id"></el-input>
+        <el-form-item label="图片">
+          <el-upload
+              ref="upload"
+              :file-list="fileList"
+              list-type="picture-card"
+              :on-preview="handlePictureCardPreview"
+              :on-remove="handleRemove"
+              :on-change="handleChange"
+              :auto-upload="false"
+          >
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible2">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
         </el-form-item>
-        <!--        <el-form-item label="姓名">-->
-        <!--          <el-input v-model="formData.stuName"></el-input>-->
-        <!--        </el-form-item>-->
-        <!--        &lt;!&ndash;        <el-form-item label="性别" >&ndash;&gt;-->
-        <!--        &lt;!&ndash;          <el-input v-model="formData.sex"></el-input>&ndash;&gt;-->
-        <!--        &lt;!&ndash;        </el-form-item>&ndash;&gt;-->
-        <!--        <el-form-item label="性别">-->
-        <!--          <el-radio-group v-model="formData.sex">-->
-        <!--            <el-radio label="男"></el-radio>-->
-        <!--            <el-radio label="女"></el-radio>-->
-        <!--          </el-radio-group>-->
-        <!--        </el-form-item>-->
-        <!--        <el-form-item label="密码" >-->
-        <!--          <el-input v-model="formData.password"></el-input>-->
-        <!--        </el-form-item>-->
+        <el-form-item label="文章标题" >
+          <el-input v-model="formData.noticeTitle"></el-input>
+        </el-form-item>
+        <el-form-item label="介绍" >
+          <el-input v-model="formData.noticeContent" type="textarea" :autosize="{ minRows: 4, maxRows: 8}"></el-input>
+        </el-form-item>
         <el-form-item  style="text-align: right;">
-          <el-button type="primary" @click="handadd">确定</el-button>
-          <el-button @click="dialogadd = false">取消</el-button>
+          <el-button type="primary" @click="handleAdd">确定</el-button>
+          <el-button @click="dialogAdd = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
-    <!--删除弹窗-->
 
 
-    <el-dialog  :visible.sync="dialogFormVisible">
+    <!--修改弹窗-->
+    <el-dialog :visible.sync="dialogUpdate">
       <el-form ref="form" :model="formData" label-width="80px">
-        <el-form-item label="琴房编号">
-          <el-input v-model="formData.proomId" readonly></el-input>
+        <el-form-item label="图片">
+          <el-upload
+              ref="upload"
+              :file-list="fileList"
+              list-type="picture-card"
+              :on-preview="handlePictureCardPreview"
+              :on-remove="handleRemove"
+              :on-change="handleChange"
+              :auto-upload="false"
+          >
+            <i class="el-icon-plus"></i>
+          </el-upload>
+          <el-dialog :visible.sync="dialogVisible2">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
         </el-form-item>
-        <el-form-item label="琴房地址">
-          <el-input v-model="formData.address"></el-input>
+        <el-form-item label="文章标题">
+          <el-input v-model="formData.noticeTitle"></el-input>
         </el-form-item>
-        <el-form-item label="琴房类型">
-          <el-input v-model="formData.type"></el-input>
+        <el-form-item label="介绍">
+          <el-input v-model="formData.noticeContent" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }"></el-input>
         </el-form-item>
-
-        <el-form-item  style="text-align: right;">
-          <el-button type="primary" @click="handedit">确定</el-button>
-          <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-form-item style="text-align: right;">
+          <el-button type="primary" @click="handeEdit">确定</el-button>
+          <el-button @click="dialogUpdate = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -94,11 +97,13 @@
 
       <el-table-column label="图片" align="center" prop="imageUrl">
         <template slot-scope="scope">
-          {{ scope.row.imageUrl || '暂无数据' }}
+          <div class="block">
+            <el-image :src="scope.row.imageUrl"></el-image>
+          </div>
         </template>
       </el-table-column>
 
-      <el-table-column label="酒店名称" align="center" prop="noticeTitle">
+      <el-table-column label="文章标题" align="center" prop="noticeTitle">
         <template slot-scope="scope">
           {{ scope.row.noticeTitle || '暂无数据' }}
         </template>
@@ -131,7 +136,9 @@
 
 <script>
 import Pagination from "@/components/pagination/pagination.vue";
-import { getAllNotice } from '@/api/noticemanage';
+import { addNotice, getAllNotice, updateNotice } from '@/api/noticemanage';
+import axios from 'axios';
+import { getAllHotel } from '@/api/hotelmanage';
 
 export default {
   components: {
@@ -149,12 +156,16 @@ export default {
       showSearch:true,
       formData:{
       },
-      dialogadd:false,
+      dialogAdd:false,
+      dialogUpdate:false,
       dialogVisible:false,
+      dialogVisible2: false,
+      dialogImageUrl: '',
       currentPage: 1,
       totalPages: 0,
       loading: false,
       dialogFormVisible: false,
+      fileList: [] // 存储上传的文件列表
     }
   },
   created() {
@@ -167,64 +178,103 @@ export default {
     getList() {
       this.loading = true
       getAllNotice(this.queryParams).then((res) => {
-        console.log("%o",res);
-        this.dataList = res.data.list;
+        this.dataList = res.data.list.map(item => {
+          return {
+            ...item,
+            imageUrl: `http://localhost:8093/${item.imageUrl}`
+          };
+        });
         this.total = res.data.total
       });
     },
     add(){
-      this.dialogadd=true
+      this.dialogAdd=true
     },
-    handadd(){
-      this.dialogadd = false;
-      this.formData.classId=this.queryParams.classId
-      // addStu(this.formData).then((res)=>{
-      //   if (res.data.code === 200) {
-      //     this.dialogFormVisible = false;
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "success",
-      //       duration: 2000, // 提示消息显示时间，单位毫秒
-      //     });
-      //     // 操作成功，执行其他逻辑
-      //     this.getList();
-      //   } else {
-      //     // 操作失败，提示用户错误信息
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "error",
-      //       duration: 2000,
-      //     });
-      //   }
-      // });
+    handleChange(file, fileList) {
+      this.fileList = fileList;
+    },
+    handleAdd() {
+      console.log(this.fileList);
+      if (this.fileList.length === 0) {
+        this.$message.error('请选择图片');
+        return;
+      }
+      const formData = new FormData();
+      formData.append('file', this.fileList[0].raw);
+
+      axios.post('http://localhost:8093/upload', formData)
+          .then(response => {
+            if (response.data === '图片上传成功') {
+              this.formData.imageUrl = 'img/' + this.fileList[0].raw.name; // 设置图片路径
+              this.saveData();
+            } else {
+              this.$message.error('图片上传失败');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            this.$message.error('图片上传失败');
+          });
+    },
+    saveData() {
+      // 在这里发送保存数据的请求
+      addNotice(this.formData).then(res => {
+        if (res.code === 200) {
+          this.$message.success('保存成功');
+          this.dialogAdd = false;
+          this.getList(); // 刷新列表或其他操作
+          this.$message.error('保存失败1');
+        }
+      }).catch(error => {
+        this.$message.error('保存失败2');
+      });
     },
     edit(row){
       this.formData = {
-        // proomId: row.id,
+        id: row.id,
+        noticeTitle:row.noticeTitle,
+        noticeContent:row.noticeContent,
       };
-      this.dialogFormVisible = true;
+      this.fileList = [{
+        name: row.imageUrl.split('/').pop(),  // 从 URL 中提取文件名
+        url: row.imageUrl  // 设置图片 URL
+      }];
+      // this.dialogImageUrl=row.imageUrl,
+      this.dialogUpdate = true;
     },
-    handedit(){
-      this.dialogFormVisible = false;
-      // updateProom(this.formData).then((res)=>{
-      //   if (res.data.code === 200) {
-      //     this.dialogFormVisible = false;
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "success",
-      //       duration: 2000, // 提示消息显示时间，单位毫秒
-      //     });
-      //     // 操作成功，执行其他逻辑
-      //     this.getList();
-      //   } else {
-      //     // 操作失败，提示用户错误信息
-      //     this.$message({
-      //       message: res.data.msg,
-      //       type: "error",
-      //       duration: 2000,
-      //     });
-      //   }
-      // });
+    handeEdit() {
+      console.log(this.fileList);
+      if (this.fileList.length === 0) {
+        this.$message.error('请选择图片');
+        return;
+      }
+      const formData = new FormData();
+      formData.append('file', this.fileList[0].raw);
+      axios.post('http://localhost:8093/upload', formData)
+          .then(response => {
+            if (response.data === '图片上传成功') {
+              this.formData.imageUrl = 'img/' + this.fileList[0].raw.name; // 设置图片路径
+              this.saveEdit();
+            } else {
+              this.$message.error('图片上传失败');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+            this.$message.error('图片上传失败');
+          });
+    },
+    saveEdit(){
+      this.dialogUpdate = false;
+      updateNotice(this.formData).then(res => {
+        if (res.code === 200) {
+          this.$message.success('修改成功');
+          this.dialogUpdate = false;
+          this.getList(); // 刷新列表或其他操作
+        }
+      }).catch(error => {
+        this.$message.error('修改失败2');
+      });
     },
     delete1(id) {
       this.$confirm('该操作将删除该信息, 是否继续?', '提示', {
@@ -270,8 +320,15 @@ export default {
 
     // 重置
     resetQuery() {
-      this.queryParams.stucardId=null;
+      this.queryParams.noticeTitle=null;
       this.getList();
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible2 = true;
     },
   }
 }

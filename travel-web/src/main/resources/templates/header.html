@@ -17,10 +17,41 @@
               <li class="list-inline-item"><a class="reset-anchor" href="#">目的地</a></li>
             </ul>
           </div>
-          <div class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
-            <div class="dropdown text-sm"><a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false"><i class="fas fa-globe-americas me-2"></i>个人中心</a>
+
+<!--          <div class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">-->
+<!--            <div class="dropdown text-sm">-->
+<!--              <a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false">-->
+<!--                  <img src="img/person-1.jpg" alt="Avatar" style="width: 30px;height: 30px;border-radius: 50%;margin-right: 10px;">-->
+<!--                  <span th:text="${username}">用户名</span>-->
+<!--              </a>-->
+<!--              <div class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="destinations">-->
+<!--                <a class="dropdown-item text-sm" th:href="@{/personInfo}">个人中心</a>-->
+<!--                <a class="dropdown-item text-sm" href="#!">退出登录</a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+
+<!--          <div  >-->
+            <div th:if="${username != null}" class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
+              <div class="dropdown text-sm">
+                <a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false">
+                  <img src="img/person-1.jpg" alt="Avatar" style="width: 30px;height: 30px;border-radius: 50%;margin-right: 10px;">
+                  <span th:text="${username}">用户名</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="destinations">
+                  <a class="dropdown-item text-sm" th:href="@{/personInfo}">个人中心</a>
+                  <a class="dropdown-item text-sm" href="#!">退出登录</a>
+                </div>
+              </div>
             </div>
-          </div>
+<!--          </div>-->
+<!--          <div >-->
+            <div th:unless="${username != null}"  class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
+              <a href="/login" class="btn btn-primary" style="padding: 0 5px 0 5px;">登录</a>
+            </div>
+<!--          </div>-->
+
         </div>
       </div>
     </div>

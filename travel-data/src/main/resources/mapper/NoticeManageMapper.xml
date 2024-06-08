@@ -11,5 +11,22 @@
     </resultMap>
     <select id="getAllNotice" resultMap="NoticeResult">
         select * from scenic_notice
+        <where>
+            <if test="noticeTitle != null and noticeTitle !=''">
+                AND scenic_notice.notice_title LIKE CONCAT('%',#{noticeTitle},'%')
+            </if>
+        </where>
     </select>
+    <insert id="addNotice" parameterType="com.example.model.Notice">
+        insert into scenic_notice (notice_title,notice_content,image_url)
+        values (#{noticeTitle},#{noticeContent},#{imageUrl});
+    </insert>
+
+    <update id="updateNotice" parameterType="com.example.model.Notice">
+        update scenic_hotel
+        set hotel_name=#{noticeTitle},
+            hotel_content=#{noticeContent},
+            image_url=#{imageUrl}
+        where id=#{id}
+    </update>
 </mapper>

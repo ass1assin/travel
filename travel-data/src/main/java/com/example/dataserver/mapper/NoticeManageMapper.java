@@ -8,5 +8,9 @@ import java.util.List;
 
 @Mapper
 public interface NoticeManageMapper {
-    public List<Notice> getAllNotice();
+    public List<Notice> getAllNotice(Notice notice);
+
+    public boolean addNotice(Notice notice);
+
+    public boolean updateNotice(Notice notice);
 }

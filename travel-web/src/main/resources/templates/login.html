@@ -24,14 +24,14 @@
         }
         .middle-box {
             margin-top: 50px;
-            height: 370px;
+            height: auto;
             padding: 30px;
             background: #fff;
             border-radius: 5px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
         .form-group {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .form-control {
             height: 40px;
@@ -49,36 +49,70 @@
         .text-center {
             text-align: center;
         }
+        .toggle-buttons {
+            margin-top: 20px;
+        }
+        .toggle-buttons label {
+            margin: 0 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #337ab7;
+        }
+        .toggle-buttons input[type="radio"] {
+            display: none;
+        }
+        .toggle-buttons input[type="radio"]:checked + label {
+            color: #286090;
+        }
     </style>
+    <script>
+      function toggleForm(event) {
+        const selectedType = event.target.value;
+        const formTitle = document.getElementById('formTitle');
+        const submitButton = document.getElementById('submitButton');
+        if (selectedType === 'register') {
+          formTitle.textContent = '注册';
+          submitButton.textContent = '注 册';
+        } else {
+          formTitle.textContent = '登录';
+          submitButton.textContent = '登 录';
+        }
+      }
+      // function toggleForm(e) {
+      //   e = e || window.Event;
+      //   var target = e.target || e.srcElement;
+      //
+      //   if (target.value === 'login') {
+      //     document.getElementById('formTitle').innerText = '登录';
+      //     document.getElementById('submitButton').innerText = '登 录';
+      //   } else if (target.value === 'register') {
+      //     document.getElementById('formTitle').innerText = '注册';
+      //     document.getElementById('submitButton').innerText = '注 册';
+      //   }
+      // }
+    </script>
 </head>
 <body class="gray-bg" src="img/watertown.jpg">
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div>
-        <form class="m-t" role="form" action="/dev-html/login" method="post">
-            <h3>登录</h3>
+        <form class="m-t" role="form" action="/login" method="post">
+            <h3 id="formTitle">登录</h3>
             <div style="color: red" th:text="${error}"></div>
-            <!--             输入账号密码   -->
             <div class="form-group">
                 <input type="text" class="form-control" id="usernameInput" placeholder="用户名" required="" name="username">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" placeholder="密码" required="" name="password">
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b" id="loginButton">登 录</button>
-
-            <div id="radioButtons">
-                <label>
-                    <input type="radio" name="type" checked value="register"> 注册
-                </label>
-                <label>
-                    <input type="radio" name="type" checked value="login"> 登录
-                </label>
+            <button type="submit" class="btn btn-primary block full-width m-b" id="submitButton">登 录</button>
+            <div class="toggle-buttons" id="radioButtons">
+                <input type="radio" name="type" value="login" id="loginRadio" checked onchange="toggleForm(event)">
+                <label for="loginRadio">登录</label>
+                <input type="radio" name="type" value="register" id="registerRadio" onchange="toggleForm(event)">
+                <label for="registerRadio">注册</label>
             </div>
-
         </form>
     </div>
 </div>
-
 </body>
 </html>
-

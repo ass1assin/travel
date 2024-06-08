@@ -31,3 +31,11 @@ export function uploadImage(data){
     data: data,
   })
 }
+
+export function deleteHotel(data){
+  return request({
+    url:'/addHotel',
+    method: 'post',
+    data: data,
+  })
+}
