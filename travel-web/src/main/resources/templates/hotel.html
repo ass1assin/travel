@@ -48,24 +48,34 @@
             <div class="row text-center">
               <!-- 左边：ID为奇数的酒店 -->
               <div th:each="hotel : ${oddHotels}" class="col-lg-6 mb-5">
-                <a th:href="@{/hotelDetail(id=${hotel.id})}" target="_blank">
-                  <img class="img-fluid mb-4" th:src="${hotel.imageUrl}" alt="Hotel Image" />
+                <a th:href="@{/dev-html/hotelDetail(id=${hotel.id})}" target="_blank">
+                  <img class="img-fluid mb-4" style="width: 400px;height: 300px;overflow: hidden;object-fit: cover;" th:src="${hotel.imageUrl}" alt="Hotel Image" />
                 </a>
                 <h3 class="h4 mt-2">
-                  <a class="reset-anchor" th:href="@{/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelName}"></a>
+                  <a class="reset-anchor" th:href="@{/dev-html/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelName}"></a>
                 </h3>
-                <p class="text-small mb-1" th:text="${hotel.hotelContent}"></p>
+                <ul class="list-inline small text-uppercase mb-0">
+                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">评分:</a></li>
+                  <li class="list-inline-item text-gray align-middle me-0"><a class="btn btn-link" th:text="${hotel.hotelScope}"></a></li>
+                </ul>
+                <a><p class="text-small mb-1" th:href="@{/dev-html/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelContent}"></p></a>
+                <a class="btn btn-link" th:href="@{/dev-html/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelLocation}"></a>
               </div>
 
               <!-- 右边：ID为偶数的酒店 -->
               <div th:each="hotel : ${evenHotels}" class="col-lg-6 mb-5">
-                <a th:href="@{/hotelDetail(id=${hotel.id})}" target="_blank">
-                  <img class="img-fluid mb-4" th:src="${hotel.imageUrl}" alt="Hotel Image" />
+                <a th:href="@{/dev-html/hotelDetail(id=${hotel.id})}" target="_blank">
+                  <img class="img-fluid mb-4" style="width: 400px;height: 300px;overflow: hidden;object-fit: cover;" th:src="${hotel.imageUrl}" alt="Hotel Image" />
                 </a>
                 <h3 class="h4 mt-2">
-                  <a class="reset-anchor" th:href="@{/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelName}"></a>
+                  <a class="reset-anchor" th:href="@{/dev-html/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelName}"></a>
                 </h3>
-                <p class="text-small mb-1" th:text="${hotel.hotelContent}"></p>
+                <ul class="list-inline small text-uppercase mb-0">
+                  <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">评分:</a></li>
+                  <li class="list-inline-item text-gray align-middle me-0"><a class="btn btn-link" th:text="${hotel.hotelScope}"></a></li>
+                </ul>
+                <a><p class="text-small mb-1" th:href="@{/dev-html/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelContent}"></p></a>
+                <a class="btn btn-link" th:href="@{/dev-html/hotelDetail(id=${hotel.id})}" th:text="${hotel.hotelLocation}"></a>
               </div>
             </div>
             <!-- Listing navigation -->
@@ -79,9 +89,9 @@
           <!-- Sidebar -->
           <div class="col-lg-4">
 
-            <div class="mb-5 text-center"><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/category-1.jpg)">
-                <p class="category-title text-uppercase small">入住获奖酒店</p></a><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/category-2.jpg)">
-                <p class="category-title text-uppercase small">当季热推</p></a><a class="category reset-anchor bg-cover bg-center" href="#!" style="background: url(img/category-3.jpg)">
+            <div class="mb-5 text-center"><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/hotel4.jpg)">
+                <p class="category-title text-uppercase small">入住获奖酒店</p></a><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/hotel1.jpg)">
+                <p class="category-title text-uppercase small">当季热推</p></a><a class="category reset-anchor bg-cover bg-center" href="#!" style="background: url(img/hotel8.jpg)">
                 <p class="category-title text-uppercase small">企业商旅</p></a></div>
 
             <!-- Latest posts widget -->

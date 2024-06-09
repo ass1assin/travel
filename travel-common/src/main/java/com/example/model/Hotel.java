@@ -6,6 +6,9 @@ public class Hotel {
     public String hotelContent;
     public String imageUrl;
 
+    public double hotelScope;
+    public String hotelLocation;
+
     private int currentPage;
 
     private int pageSize;
@@ -36,6 +39,22 @@ public class Hotel {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public double getHotelScope() {
+        return hotelScope;
+    }
+
+    public void setHotelScope(double hotelScope) {
+        this.hotelScope = hotelScope;
+    }
+
+    public String getHotelLocation() {
+        return hotelLocation;
+    }
+
+    public void setHotelLocation(String hotelLocation) {
+        this.hotelLocation = hotelLocation;
     }
 
     public void setImageUrl(String imageUrl) {

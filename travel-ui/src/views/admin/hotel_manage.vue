@@ -40,6 +40,12 @@
         <el-form-item label="酒店名称" >
           <el-input v-model="formData.hotelName"></el-input>
         </el-form-item>
+        <el-form-item label="酒店评分" >
+          <el-input v-model="formData.hotelScope"></el-input>
+        </el-form-item>
+        <el-form-item label="酒店地点" >
+          <el-input v-model="formData.hotelLocation"></el-input>
+        </el-form-item>
         <el-form-item label="介绍" >
           <el-input v-model="formData.hotelContent" type="textarea" :autosize="{ minRows: 4, maxRows: 8}"></el-input>
         </el-form-item>
@@ -72,6 +78,12 @@
         </el-form-item>
         <el-form-item label="酒店名称">
           <el-input v-model="formData.hotelName"></el-input>
+        </el-form-item>
+        <el-form-item label="酒店评分" >
+          <el-input v-model="formData.hotelScope"></el-input>
+        </el-form-item>
+        <el-form-item label="酒店地点" >
+          <el-input v-model="formData.hotelLocation"></el-input>
         </el-form-item>
         <el-form-item label="介绍">
           <el-input v-model="formData.hotelContent" type="textarea" :autosize="{ minRows: 4, maxRows: 8 }"></el-input>
@@ -108,10 +120,19 @@
           {{ scope.row.hotelName || '暂无数据' }}
         </template>
       </el-table-column>
-
-      <el-table-column label="介绍" align="center" prop="hotelContent">
+      <el-table-column label="酒店评分" align="center" prop="hotelName">
         <template slot-scope="scope">
-          <!--          {{ scope.row.startTime || '暂无数据' }}-->
+          {{ scope.row.hotelScope || '暂无数据' }}
+        </template>
+      </el-table-column>
+      <el-table-column label="酒店地点" align="center" prop="hotelName">
+        <template slot-scope="scope">
+          {{ scope.row.hotelLocation || '暂无数据' }}
+        </template>
+      </el-table-column>
+
+      <el-table-column label="介绍" align="center" prop="hotelContent" >
+        <template slot-scope="scope" >
           {{ scope.row.hotelContent || '暂无数据' }}
         </template>
       </el-table-column>
@@ -254,6 +275,8 @@ export default {
         id: row.id,
         hotelName:row.hotelName,
         hotelContent:row.hotelContent,
+        hotelScope:row.hotelScope,
+        hotelLocation:row.hotelLocation,
       };
       this.fileList = [{
         name: row.imageUrl.split('/').pop(),  // 从 URL 中提取文件名

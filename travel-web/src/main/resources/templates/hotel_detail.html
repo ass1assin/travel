@@ -21,6 +21,32 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.png">
+    <style>
+      .comment-section {
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 40px;
+      }
+      .comment-section h3 {
+        margin-bottom: 20px;
+      }
+      .form-control {
+        border-radius: 5px;
+      }
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 5px;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+      }
+      .comment-button {
+        display: flex;
+        justify-content: flex-end;
+      }
+    </style>
   </head>
   <body>
   <th:block th:replace="header :: header" />
@@ -39,11 +65,32 @@
             <h2 th:text="${hotelInfo.hotelName}"></h2>
             <p class="text-muted mb-4" th:text="${hotelInfo.hotelContent}"></p>
             <img class="img-fluid mb-4" style="width: 100%" th:src="@{${hotelInfo.imageUrl}}" alt="Hotel Image">
+            <ul class="list-inline small text-uppercase mb-0">
+              <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">评分:</a></li>
+              <li class="list-inline-item text-gray align-middle me-0"><a class="btn btn-link" th:text="${hotelInfo.hotelScope}"></a></li>
+            </ul>
+            <ul class="list-inline small text-uppercase mb-0">
+              <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">地点:</a></li>
+              <li class="list-inline-item text-gray align-middle me-0"><a class="btn btn-link" th:text="${hotelInfo.hotelLocation}"></a></li>
+            </ul>
             <p class="text-muted mb-5" th:text="${hotelInfo.hotelContent}"></p>
             <h3 class="mb-4">如何达到优质的文章</h3>
-
             <p>在不断吸取蜂首文章和优质文章中的精华后，我发现完成一篇优秀的文章，需要完整的写作框架。文章中，不仅需要行程安排的合理，行程路线也要完整，还要有详尽的衣、食、住、行的全方位的介绍。</p>
             <p class="mb-5">融合进自己对事物的认知和感悟，将文字和图片、视频完美的结合在一起，才能够得到一篇赏心悦目的文章。我还要不断的提炼，提升个人写作能力，让更多的读者喜欢上自己的作品，获得视觉上的享受。</p>
+            <div class="comment-section">
+              <h3 class="h4">发表评论</h3>
+              <form id="commentForm" class="mb-5">
+                <div class="form-group">
+                  <label for="commentContent">评论内容</label>
+                  <textarea class="form-control" id="commentContent" name="commentContent" rows="4" required></textarea>
+                  <input type="hidden" id="hotelId" name="hotelId" th:value="${hotelInfo.id}"/>
+                </div>
+                <div class="comment-button">
+                  <button type="button" class="btn btn-primary" id="submitCommentButton" style="margin-top: 10px">提交评论</button>
+                </div>
+              </form>
+            </div>
+
             <h3 class="h4 mb-4 d-flex align-items-center"><span>评论</span></h3>
 
             <ul class="list-unstyled comments">
@@ -67,9 +114,9 @@
           </div>
           <div class="col-lg-4">
 
-            <div class="mb-5 text-center"><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/category-1.jpg)">
-              <p class="category-title text-uppercase small">入住获奖酒店</p></a><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/category-2.jpg)">
-              <p class="category-title text-uppercase small">当季热推</p></a><a class="category reset-anchor bg-cover bg-center" href="#!" style="background: url(img/category-3.jpg)">
+            <div class="mb-5 text-center"><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/hotel4.jpg)">
+              <p class="category-title text-uppercase small">入住获奖酒店</p></a><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/hotel1.jpg)">
+              <p class="category-title text-uppercase small">当季热推</p></a><a class="category reset-anchor bg-cover bg-center" href="#!" style="background: url(img/hotel8.jpg)">
               <p class="category-title text-uppercase small">企业商旅</p></a></div>
 
             <!-- Latest posts widget -->
@@ -124,7 +171,36 @@
       injectSvgSprite('icons/orion-svg-sprite.svg');
 
     </script>
-    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#submitCommentButton').click(function() {
+        var commentContent = $('#commentContent').val();
+        var hotelId = $('#hotelId').val();
+        $.ajax({
+          type: 'POST',
+          url: '/dev-html/submitComment',
+          data: {
+            commentContent: commentContent,
+            hotelId: hotelId
+          },
+          success: function(response) {
+            if (response) {
+              alert('评论提交成功！');
+              // 重新加载当前页面以刷新评论列表
+              location.reload();
+            } else {
+              alert('评论提交失败，请稍后再试。');
+            }
+          },
+          error: function() {
+            alert('评论提交失败，请稍后再试。');
+          }
+        });
+      });
+    });
+  </script>
   </body>
+
 </html>

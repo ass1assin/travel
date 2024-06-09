@@ -26,6 +26,8 @@
     <module>travel-framework</module>
       <module>travel-web</module>
       <module>travel-common</module>
+      <module>travel-email</module>
+    <module>travel-map</module>
   </modules>
   <packaging>pom</packaging>
 

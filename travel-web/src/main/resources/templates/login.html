@@ -78,24 +78,12 @@
           submitButton.textContent = '登 录';
         }
       }
-      // function toggleForm(e) {
-      //   e = e || window.Event;
-      //   var target = e.target || e.srcElement;
-      //
-      //   if (target.value === 'login') {
-      //     document.getElementById('formTitle').innerText = '登录';
-      //     document.getElementById('submitButton').innerText = '登 录';
-      //   } else if (target.value === 'register') {
-      //     document.getElementById('formTitle').innerText = '注册';
-      //     document.getElementById('submitButton').innerText = '注 册';
-      //   }
-      // }
     </script>
 </head>
 <body class="gray-bg" src="img/watertown.jpg">
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div>
-        <form class="m-t" role="form" action="/login" method="post">
+        <form class="m-t" role="form" action="/dev-html/login" method="post">
             <h3 id="formTitle">登录</h3>
             <div style="color: red" th:text="${error}"></div>
             <div class="form-group">

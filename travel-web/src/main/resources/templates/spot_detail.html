@@ -1,10 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Travel | Bootstrap blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Swiper slider-->
+    <link rel="stylesheet" href="vendor/swiper/swiper-bundle.min.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="vendor/owl.carousel2/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendor/owl.carousel2/assets/owl.theme.default.min.css">
+    <!-- Google fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,400&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <style>
+        .comment-section {
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+        .comment-section h3 {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 5px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .comment-button {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
 </head>
 <body>
+<th:block th:replace="header :: header" />
+<section class="py-5">
+    <div class="container" style="text-align: center">
+        <h1>梧州</h1>
+    </div>
+    <div class="container text-center">
+        <p class="mb-3">梧州市，古称“苍梧”“广信”， 广西壮族自治区 辖地级市，位于广西壮族自治区东部，扼浔江、桂江、西江总汇，为 珠江—西江经济带 重要节点城市</p>
+    </div>
+    <img class="w-100 py-5" src="img/post-banner.jpg" alt="">
+    <div class="container">
+        <div class="row gy-5">
+            <div class="col-lg-8">
 
+                <h2 th:text="${spotInfo.spotName}"></h2>
+                <p class="text-muted mb-4" th:text="${spotInfo.spotContent}"></p>
+                <img class="img-fluid mb-4" style="width: 100%" th:src="@{${spotInfo.imageUrl}}" alt="Spot Image">
+<!--                <ul class="list-inline small text-uppercase mb-0">-->
+<!--                    <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">评分:</a></li>-->
+<!--                    <li class="list-inline-item text-gray align-middle me-0"><a class="btn btn-link" th:text="${hotelInfo.hotelScope}"></a></li>-->
+<!--                </ul>-->
+                <ul class="list-inline small text-uppercase mb-0">
+                    <li class="list-inline-item align-middle me-0"><a class="fw-bold reset-anchor" href="#!">地点:</a></li>
+                    <li class="list-inline-item text-gray align-middle me-0"><a class="btn btn-link" th:text="${spotInfo.spotLocation}"></a></li>
+                </ul>
+                <p class="text-muted mb-5" th:text="${spotInfo.spotContent}"></p>
+                <h3 class="mb-4">如何达到优质的文章</h3>
+                <p>在不断吸取蜂首文章和优质文章中的精华后，我发现完成一篇优秀的文章，需要完整的写作框架。文章中，不仅需要行程安排的合理，行程路线也要完整，还要有详尽的衣、食、住、行的全方位的介绍。</p>
+                <p class="mb-5">融合进自己对事物的认知和感悟，将文字和图片、视频完美的结合在一起，才能够得到一篇赏心悦目的文章。我还要不断的提炼，提升个人写作能力，让更多的读者喜欢上自己的作品，获得视觉上的享受。</p>
+                <div class="comment-section">
+                    <h3 class="h4">发表评论</h3>
+                    <form id="commentForm" class="mb-5">
+                        <div class="form-group">
+                            <label for="commentContent">评论内容</label>
+                            <textarea class="form-control" id="commentContent" name="commentContent" rows="4" required></textarea>
+                            <input type="hidden" id="spotId" name="spotId" th:value="${spotInfo.id}"/>
+                        </div>
+                        <div class="comment-button">
+                            <button type="button" class="btn btn-primary" id="submitCommentButton" style="margin-top: 10px">提交评论</button>
+                        </div>
+                    </form>
+                </div>
+
+                <h3 class="h4 mb-4 d-flex align-items-center"><span>评论</span></h3>
+
+                <ul class="list-unstyled comments">
+                    <li th:each="review : ${reviewInfo}">
+                        <div class="d-flex mb-4">
+                            <div class="pe-2 flex-grow-1" style="width: 75px; min-width: 75px;max-width: 75px">
+                                <img class="rounded-circle shadow-sm img-fluid img-thumbnail" th:src="@{${review.userAvatar}}" alt=""/>
+                            </div>
+                            <div class="ps-2">
+                                <p class="small mb-0 text-primary" th:text="${review.reviewTime}"></p>
+                                <h5 th:text="${review.userName}"></h5>
+                                <p class="text-muted text-sm mb-2" th:text="${review.content}"></p>
+                                <a class="reset-anchor text-sm" href="#!">
+                                    <i class="fas fa-share me-2 text-primary"></i>
+                                    <strong>转发</strong>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-4">
+
+                <div class="mb-5 text-center"><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/hotel4.jpg)">
+                    <p class="category-title text-uppercase small">入住获奖酒店</p></a><a class="category reset-anchor bg-cover bg-center mb-2" href="#!" style="background: url(img/hotel1.jpg)">
+                    <p class="category-title text-uppercase small">当季热推</p></a><a class="category reset-anchor bg-cover bg-center" href="#!" style="background: url(img/hotel8.jpg)">
+                    <p class="category-title text-uppercase small">企业商旅</p></a></div>
+
+                <!-- Latest posts widget -->
+                <div class="mb-5">
+                    <div style="display: flex;justify-content: space-between;">
+                        <span><h3 class="h5">旅游攻略推荐</h3></span>
+                        <span style="color: #5c636a">更多</span>
+                    </div>
+                    <div>
+                        <img class="img-fluid" src="img/liangyusheng.jpg" alt="">
+                    </div>
+                    <h4 class="h5" style="margin-top: 20px">最新资讯</h4>
+                    <ul class="list-unstyled">
+                        <li class="d-flex mb-1" style="overflow: hidden;">
+                            <p>02月19日科技"战密”∶马蜂窝大数据赋能旅游业等你来</p>
+                        </li>
+                        <li class="d-flex mb-1">
+                            <p>02月13日陈罡:控情下旅游业的“守恒与求变等着你</p>
+                        </li>
+                        <li class="d-flex mb-1">
+                            <p>02月06日马蜂窝将退订完成率定为最高KPI</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="bg-dark py-4">
+    <div class="container">
+        <div class="row py-2 gy-2">
+
+        </div>
+    </div>
+</footer>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="vendor/swiper/swiper-bundle.min.js"></script>
+<script src="js/front.js"></script>
+<script>
+  function injectSvgSprite(path) {
+
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", path, true);
+    ajax.send();
+    ajax.onload = function(e) {
+      var div = document.createElement("div");
+      div.className = 'd-none';
+      div.innerHTML = ajax.responseText;
+      document.body.insertBefore(div, document.body.childNodes[0]);
+    }
+  }
+  injectSvgSprite('icons/orion-svg-sprite.svg');
+
+</script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#submitCommentButton').click(function() {
+      var commentContent = $('#commentContent').val();
+      var spotId = $('#spotId').val();
+      $.ajax({
+        type: 'POST',
+        url: '/dev-html/submitSpotComment',
+        data: {
+          commentContent: commentContent,
+          spotId: spotId
+        },
+        success: function(response) {
+          if (response) {
+            alert('评论提交成功！');
+            // 重新加载当前页面以刷新评论列表
+            location.reload();
+          } else {
+            alert('评论提交失败，请稍后再试。');
+          }
+        },
+        error: function() {
+          alert('评论提交失败，请稍后再试。');
+        }
+      });
+    });
+  });
+</script>
 </body>
+
 </html>

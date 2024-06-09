@@ -11,4 +11,5 @@ public interface HotelService {
     public Hotel getHotelById(int id);
 
     public List<Review> getReviewById(int id);
+    public boolean saveComment(Review review);
 }

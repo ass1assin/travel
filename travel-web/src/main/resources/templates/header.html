@@ -18,41 +18,23 @@
             </ul>
           </div>
 
-<!--          <div class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">-->
-<!--            <div class="dropdown text-sm">-->
-<!--              <a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false">-->
-<!--                  <img src="img/person-1.jpg" alt="Avatar" style="width: 30px;height: 30px;border-radius: 50%;margin-right: 10px;">-->
-<!--                  <span th:text="${username}">用户名</span>-->
-<!--              </a>-->
-<!--              <div class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="destinations">-->
-<!--                <a class="dropdown-item text-sm" th:href="@{/personInfo}">个人中心</a>-->
-<!--                <a class="dropdown-item text-sm" href="#!">退出登录</a>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-
-<!--          <div  >-->
-            <div th:if="${username != null}" class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
-              <div class="dropdown text-sm">
-                <a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false">
-                  <img src="img/person-1.jpg" alt="Avatar" style="width: 30px;height: 30px;border-radius: 50%;margin-right: 10px;">
-                  <span th:text="${username}">用户名</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="destinations">
-                  <a class="dropdown-item text-sm" th:href="@{/personInfo}">个人中心</a>
-                  <a class="dropdown-item text-sm" href="#!">退出登录</a>
-                </div>
+          <div class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
+            <div th:if="${session.userLoggedIn}" class="dropdown text-sm">
+              <a class="reset-anchor dropdown-toggle" id="destinations" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-haspopup="true" aria-expanded="false">
+                <img src="img/person-1.jpg" alt="Avatar" style="width: 30px;height: 30px;border-radius: 50%;margin-right: 10px;">
+                <span th:text="${session.username}">用户名</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="destinations">
+                <a class="dropdown-item text-sm" th:href="@{/dev-html/personInfo}">个人中心</a>
+                <a class="dropdown-item text-sm" href="#!">退出登录</a>
               </div>
             </div>
-<!--          </div>-->
-<!--          <div >-->
-            <div th:unless="${username != null}"  class="col-lg-4 d-none d-lg-block text-end" style="margin-left: auto;">
-              <a href="/login" class="btn btn-primary" style="padding: 0 5px 0 5px;">登录</a>
+            <div th:unless="${session.userLoggedIn}">
+              <a th:href="@{/dev-html/login}" class="btn btn-primary" style="padding: 0 5px 0 5px;">登录</a>
             </div>
-<!--          </div>-->
-
+          </div>
         </div>
+
       </div>
     </div>
 
@@ -63,7 +45,7 @@
         <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item px-1">
-              <a class="nav-link active" th:href="@{/dev-html/spots}">景点</a>
+              <a class="nav-link" th:href="@{/dev-html/spots}">景点</a>
             </li>
             <li class="nav-item px-1">
               <a class="nav-link" th:href="@{/dev-html/hotel}">酒店</a>

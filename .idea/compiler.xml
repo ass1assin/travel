@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="travel-gateway" />
+        <module name="travel-email" />
         <module name="travel-user" />
-        <module name="travel-data" />
         <module name="travel-web" />
+        <module name="travel-gateway" />
+        <module name="travel-data" />
+        <module name="travel-map" />
         <module name="travel-common" />
         <module name="travel-framework" />
       </profile>

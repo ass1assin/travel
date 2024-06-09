@@ -37,16 +37,16 @@ public class UserController {
                     modelAndView.setViewName("/login");
                 } else {
                     addUserInfoToCookie(user, response);
-                    modelAndView.setViewName("redirect:/spots");
+                    session.setAttribute("userLoggedIn", true);
+                    session.setAttribute("username", user.getUserName());
+                    session.setAttribute("userAvatar", user.getUserAvatar());
+                    modelAndView.setViewName("redirect:http://localhost:10010/dev-html/spots");
                 }
                 break;
             case "register":
-                System.out.println("走这里了吗");
                 String result = userClient.register(username, password);
-                System.out.println("result"+result);
                 if ("already_registered".equals(result)) {
                     modelAndView.addObject("error", "已经注册过了");
-                    System.out.println("已经注册过了这里");
                     modelAndView.setViewName("/login");
                 } else if ("registration_success".equals(result)) {
                     modelAndView.addObject("error", "注册成功");
@@ -54,8 +54,6 @@ public class UserController {
                 }
                 break;
         }
-        session.setAttribute("userLoggedIn", true);
-        modelAndView.addObject("redirectToHeader", true); // 添加标记，表示需要重定向到 /header
         return modelAndView;
     }
 
@@ -63,18 +61,20 @@ public class UserController {
         // 将用户的个人信息存储到cookie中
         Cookie usernameCookie = new Cookie("username", user.getUserName());
         Cookie passwordCookie = new Cookie("password", user.getPassWord());
+        Cookie userAvatarCookie = new Cookie("userAvatar", user.getUserAvatar());
 
         // 设置cookie的有效路径和有效期
         usernameCookie.setPath("/");
         passwordCookie.setPath("/");
-//        phoneCookie.setPath("/");
+        userAvatarCookie.setPath("/");
         usernameCookie.setMaxAge(60 * 60 * 24); // 1天
         passwordCookie.setMaxAge(60 * 60 * 24); // 1天
-//        phoneCookie.setMaxAge(60 * 60 * 24); // 1天
+        userAvatarCookie.setMaxAge(60 * 60 * 24); // 1天
 
         // 添加cookie到响应
         response.addCookie(usernameCookie);
         response.addCookie(passwordCookie);
+        response.addCookie(userAvatarCookie);
     }
 @GetMapping("/personInfo")
 public ModelAndView getPersonInfo(HttpServletRequest request) {

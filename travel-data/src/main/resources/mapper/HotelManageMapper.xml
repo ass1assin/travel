@@ -8,6 +8,8 @@
         <result property="hotelName"       column="hotel_name"      />
         <result property="hotelContent"       column="hotel_content"      />
         <result property="imageUrl"       column="image_url"      />
+        <result property="hotelScope"       column="hotel_scope"      />
+        <result property="hotelLocation"       column="hotel_location"      />
     </resultMap>
     <select id="getAllHotel" resultMap="HotelResult" parameterType="com.example.model.Hotel">
         select * from scenic_hotel
@@ -18,15 +20,17 @@
         </where>
     </select>
     <insert id="addHotel" parameterType="com.example.model.Hotel">
-         insert into scenic_hotel (hotel_name,hotel_content,image_url)
-         values (#{hotelName},#{hotelContent},#{imageUrl});
+         insert into scenic_hotel (hotel_name,hotel_content,image_url,hotel_scope,hotel_location)
+         values (#{hotelName},#{hotelContent},#{imageUrl},#{hotelScope},#{hotelLocation});
     </insert>
 
     <update id="updateHotel" parameterType="com.example.model.Hotel">
          update scenic_hotel
          set hotel_name=#{hotelName},
              hotel_content=#{hotelContent},
-             image_url=#{imageUrl}
+             image_url=#{imageUrl},
+             hotel_scope=#{hotelScope},
+             hotel_location=#{hotelLocation}
          where id=#{id}
     </update>
 </mapper>

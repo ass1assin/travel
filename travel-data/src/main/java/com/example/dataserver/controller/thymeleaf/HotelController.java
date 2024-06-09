@@ -7,10 +7,7 @@ import com.github.pagehelper.PageInfo;
 import com.example.model.Hotel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +32,10 @@ public class HotelController {
     @GetMapping("/getReviewById")
     public List<Review> getReviewById(@RequestParam("id") int id){
         return hotelService.getReviewById(id);
+    }
+
+    @PostMapping("/submitComments")
+    public boolean saveComment(@RequestBody Review review){
+        return hotelService.saveComment(review);
     }
 }

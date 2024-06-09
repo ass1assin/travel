@@ -2,8 +2,8 @@
   <div style="margin: 20px">
     <el-form :model="queryParams" ref="queryForm" label-width="100px" size="small" :inline="true" v-show="showSearch"
              class="top-query">
-      <el-form-item label="学生证编号" prop="name">
-        <el-input v-model="queryParams.noticeTitle" placeholder="请输入琴房地址" clearable @keyup.enter.native="query">
+      <el-form-item label="文章标题" prop="name">
+        <el-input v-model="queryParams.noticeTitle" placeholder="请输入文章标题" clearable @keyup.enter.native="query">
         </el-input>
       </el-form-item>
 

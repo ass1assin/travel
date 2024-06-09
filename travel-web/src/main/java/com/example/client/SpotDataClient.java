@@ -12,5 +12,9 @@ public interface SpotDataClient {
     @GetMapping("/getSpots")
     PageInfo<Notice> getSpots(@RequestParam("currentPage") int currentPage,
                               @RequestParam("pageSize") int pageSize);
+
+    @GetMapping("/getAllSpots")
+    PageInfo<Spot> getAllSpots(@RequestParam("currentPage") int currentPage,
+                              @RequestParam("pageSize") int pageSize);
 }
 

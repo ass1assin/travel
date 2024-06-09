@@ -6,6 +6,9 @@
     <resultMap type="com.example.model.Spot" id="SpotResult">
         <id     property="id"         column="id"        />
         <result property="spotName"       column="spot_name"      />
+        <result property="spotContent"       column="spot_content"      />
+        <result property="spotLocation"       column="spot_location"      />
+        <result property="imageUrl"       column="image_url"      />
     </resultMap>
     <resultMap type="com.example.model.Notice" id="NoticeResult">
         <id     property="id"         column="id"        />
@@ -13,10 +16,31 @@
         <result property="noticeContent"       column="notice_content"      />
         <result property="imageUrl"       column="image_url"      />
     </resultMap>
-    <select id="getSpot" resultMap="SpotResult">
-        select * from scenic_spot
-    </select>
+    <resultMap type="com.example.model.Review" id="ReviewResult">
+        <id     property="id"         column="id"        />
+        <result property="content"       column="content"      />
+        <result property="reviewTime"       column="review_time"      />
+        <result property="reviewType"       column="review_type"      />
+        <result property="userName"       column="user_name"      />
+        <result property="userAvatar"       column="user_avatar"      />
+    </resultMap>
     <select id="getNotice" resultMap="NoticeResult">
         select * from scenic_notice
     </select>
+    <select id="getAllSpots" resultMap="SpotResult">
+        select * from scenic_spot
+    </select>
+
+    <select id="getSpotById" resultMap="SpotResult" parameterType="int">
+        select * from scenic_spot where id=#{id}
+    </select>
+
+    <select id="getSpotReviewById" resultMap="ReviewResult" parameterType="int">
+        select * from scenic_review where relation_id=#{id} and review_type=0
+    </select>
+
+    <insert id="saveSpotComment" parameterType="com.example.model.Review">
+        insert into scenic_review (content,user_name,review_time,review_type,relation_id,user_avatar)
+        values (#{content},#{userName},#{reviewTime},#{reviewType},#{relationId},#{userAvatar});
+    </insert>
 </mapper>

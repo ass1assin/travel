@@ -25,7 +25,7 @@
           </template>
           <el-menu-item-group style="padding: 0">
             <router-link to="/index_manage" style="text-decoration: none;">
-              <el-menu-item index="首页管理">首页管理</el-menu-item>
+              <el-menu-item index="景点管理">景点管理</el-menu-item>
             </router-link>
             <router-link to="/hotel_manage" style="text-decoration: none;">
               <el-menu-item index="酒店管理">酒店管理</el-menu-item>

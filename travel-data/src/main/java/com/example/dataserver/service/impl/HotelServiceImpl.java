@@ -26,4 +26,8 @@ public class HotelServiceImpl implements HotelService {
     public List<Review> getReviewById(int id){
         return hotelMapper.getReviewById(id);
     };
+
+    public boolean saveComment(Review review){
+        return hotelMapper.saveComment(review);
+    };
 }

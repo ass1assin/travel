@@ -5,6 +5,10 @@ public class Spot {
 
     public String spotName;
 
+    public String spotLocation;
+    public String spotContent;
+
+    public String imageUrl;
     private int currentPage;
 
     private int pageSize;
@@ -39,6 +43,30 @@ public class Spot {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getSpotLocation() {
+        return spotLocation;
+    }
+
+    public void setSpotLocation(String spotLocation) {
+        this.spotLocation = spotLocation;
+    }
+
+    public String getSpotContent() {
+        return spotContent;
+    }
+
+    public void setSpotContent(String spotContent) {
+        this.spotContent = spotContent;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override
